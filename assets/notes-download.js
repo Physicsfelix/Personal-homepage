@@ -211,12 +211,14 @@ function replaceWithOrdinaryDownload(button, mirrorUrl, documentRef) {
   fallback.target = '_blank';
   fallback.rel = 'noopener';
   button.replaceWith(fallback);
+  fallback.focus();
 }
 
-async function runStableDownload({ button, pageUrl, mirrorUrl, filename, documentRef, fetchImpl }) {
+async function runStableDownload({ button, status, pageUrl, mirrorUrl, filename, documentRef, fetchImpl }) {
   button.disabled = true;
   button.setAttribute('aria-busy', 'true');
   button.textContent = '准备下载…';
+  status.textContent = '准备下载…';
   try {
     const totalBytes = await discoverContentLength(pageUrl, { fetchImpl });
     const bytes = await retrievePdf({
@@ -224,10 +226,15 @@ async function runStableDownload({ button, pageUrl, mirrorUrl, filename, documen
       mirrorUrl,
       totalBytes,
       fetchImpl,
-      onProgress: (percent) => { button.textContent = `下载 ${percent}%`; },
+      onProgress: (percent) => {
+        const message = `下载 ${percent}%`;
+        button.textContent = message;
+        status.textContent = message;
+      },
     });
     savePdfBytes(bytes, filename, { documentRef });
     button.textContent = '已开始下载';
+    status.textContent = '已开始下载';
     setTimeout(() => {
       if (button.isConnected) {
         button.disabled = false;
@@ -237,6 +244,7 @@ async function runStableDownload({ button, pageUrl, mirrorUrl, filename, documen
     }, 2_000);
   } catch (error) {
     console.warn('Stable PDF download failed; exposing ordinary download.', error);
+    status.textContent = '稳定下载失败，可使用普通下载';
     replaceWithOrdinaryDownload(button, mirrorUrl, documentRef);
   }
 }
@@ -282,9 +290,16 @@ export function enhanceNotesListing({
       downloadButton.type = 'button';
       downloadButton.className = 'note-action note-action-download';
       downloadButton.textContent = '稳定下载';
-      downloadButton.setAttribute('aria-live', 'polite');
+
+      const downloadStatus = documentRef.createElement('span');
+      downloadStatus.className = 'visually-hidden note-download-status';
+      downloadStatus.setAttribute('role', 'status');
+      downloadStatus.setAttribute('aria-live', 'polite');
+      downloadStatus.setAttribute('aria-atomic', 'true');
+
       downloadButton.addEventListener('click', () => runStableDownload({
         button: downloadButton,
+        status: downloadStatus,
         pageUrl,
         mirrorUrl,
         filename,
@@ -292,6 +307,7 @@ export function enhanceNotesListing({
         fetchImpl,
       }));
       actions.append(downloadButton);
+      actions.append(downloadStatus);
     }
 
     item.append(actions);

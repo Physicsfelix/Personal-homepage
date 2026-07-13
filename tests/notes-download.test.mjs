@@ -50,7 +50,8 @@ class FakeElement {
     this.parentElement = null;
     this.className = '';
     this.dataset = {};
-    this.textContent = '';
+    this._textContent = '';
+    this.textContentHistory = [];
     this.href = '';
     this.download = '';
     this.target = '';
@@ -61,6 +62,16 @@ class FakeElement {
     this.isConnected = false;
     this.clicked = false;
     this.listeners = new Map();
+    this.ownerDocument = null;
+  }
+
+  set textContent(value) {
+    this._textContent = String(value);
+    this.textContentHistory.push(this._textContent);
+  }
+
+  get textContent() {
+    return this._textContent;
   }
 
   append(...elements) {
@@ -95,6 +106,10 @@ class FakeElement {
     return this.listeners.get('click')?.();
   }
 
+  focus() {
+    if (this.ownerDocument) this.ownerDocument.activeElement = this;
+  }
+
   querySelector(selector) {
     if (selector === ':scope > .note-card-actions') {
       return this.children.find((child) => hasClass(child, 'note-card-actions')) ?? null;
@@ -125,14 +140,17 @@ class FakeElement {
 class FakeDocument {
   constructor() {
     this.body = new FakeElement('body');
+    this.body.ownerDocument = this;
     this.body.isConnected = true;
     this.createdElements = [];
     this.config = null;
     this.cardLinks = [];
+    this.activeElement = null;
   }
 
   createElement(tagName) {
     const element = new FakeElement(tagName);
+    element.ownerDocument = this;
     this.createdElements.push(element);
     return element;
   }
@@ -384,7 +402,42 @@ test('file mode adds a direct download and keeps actions inside the listing item
   assert.equal(cardLink.rel, 'noopener');
 });
 
-test('HTTPS mode exposes accessible busy state and ordinary fallback on failure', async () => {
+test('HTTPS mode announces progress and success through a persistent sibling status', async () => {
+  const { documentRef, item } = createListingFixture();
+  const fetchImpl = async (_url, init) => {
+    if (init.method === 'HEAD') {
+      return new Response(null, {
+        status: 200,
+        headers: { 'Content-Length': '4' },
+      });
+    }
+    return rangeResponse([0, 1, 2, 3]);
+  };
+  enhanceNotesListing({
+    documentRef,
+    locationRef: { href: 'https://physicsfelix.github.io/Personal-homepage/notes.html', protocol: 'https:' },
+    fetchImpl,
+  });
+
+  const actions = item.querySelector(':scope > .note-card-actions');
+  const button = actions.children[1];
+  const status = actions.children[2];
+  assert.equal(button.tagName, 'BUTTON');
+  assert.equal(button.getAttribute('aria-live'), null);
+  assert.ok(status, 'expected a persistent sibling status region');
+  assert.equal(status.parentElement, actions);
+  assert.equal(status.getAttribute('role'), 'status');
+  assert.equal(status.getAttribute('aria-live'), 'polite');
+
+  await button.click();
+
+  assert.equal(status.parentElement, actions);
+  assert.ok(status.textContentHistory.some((message) => /准备下载/.test(message)));
+  assert.ok(status.textContentHistory.some((message) => /下载 100%/.test(message)));
+  assert.ok(status.textContentHistory.some((message) => /已开始下载/.test(message)));
+});
+
+test('HTTPS mode keeps the failure status and focuses the ordinary download fallback', async () => {
   const { documentRef, item } = createListingFixture();
   let resolveHead;
   const fetchImpl = async (_url, init) => {
@@ -399,8 +452,12 @@ test('HTTPS mode exposes accessible busy state and ordinary fallback on failure'
 
   const actions = item.querySelector(':scope > .note-card-actions');
   const button = actions.children[1];
+  const status = actions.children[2];
   assert.equal(button.tagName, 'BUTTON');
-  assert.equal(button.getAttribute('aria-live'), 'polite');
+  assert.equal(button.getAttribute('aria-live'), null);
+  assert.ok(status, 'expected a persistent sibling status region');
+  assert.equal(status.getAttribute('role'), 'status');
+  assert.equal(status.getAttribute('aria-live'), 'polite');
 
   const warnings = [];
   const originalWarn = console.warn;
@@ -424,6 +481,9 @@ test('HTTPS mode exposes accessible busy state and ordinary fallback on failure'
   assert.equal(fallback.target, '_blank');
   assert.equal(fallback.rel, 'noopener');
   assert.equal(fallback.parentElement, actions);
+  assert.equal(documentRef.activeElement, fallback);
+  assert.equal(status.parentElement, actions);
+  assert.match(status.textContent, /失败.*普通下载/);
 });
 
 test('enhanceNotesListing is idempotent and leaves actions on the sortable item', () => {
