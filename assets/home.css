@@ -1,0 +1,7 @@
+#title-block-header {
+  display: none;
+}
+
+main#quarto-document-content {
+  padding-top: 0;
+}

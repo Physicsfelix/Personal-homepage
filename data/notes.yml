@@ -1,0 +1,35 @@
+- title: "非交换积分——从冯诺依曼代数到非交换 Lp 空间"
+  course: "非交换积分与算子代数"
+  status: "持续修订"
+  version: "2026.07"
+  date: "2026-07-11"
+  description: "围绕冯诺依曼代数、可测算子与非交换 Lp 空间整理的个人学习笔记，内容仍在持续修订。"
+  categories: ["学习笔记", "算子代数", "非交换分析"]
+  path: "files/notes/noncommutative-integration.pdf"
+
+- title: "泛函分析 I：基础理论——现代分析之门"
+  course: "泛函分析"
+  status: "持续修订"
+  version: "2026.07"
+  date: "2026-07-07"
+  description: "从赋范空间、Banach 空间与 Hilbert 空间出发；当前正文以第 1–4 章为主，第 5–8 章仍在补写。"
+  categories: ["学习笔记", "泛函分析", "现代分析"]
+  path: "files/notes/functional-analysis-i-foundations.pdf"
+
+- title: "泛函分析 II：算子理论——算子代数与算子谱理论"
+  course: "算子理论与算子代数"
+  status: "持续修订"
+  version: "2026.07"
+  date: "2026-07-04"
+  description: "围绕算子谱理论、C* 代数与 von Neumann 代数整理；末章仍有 10 处交叉引用标记待修复。"
+  categories: ["学习笔记", "泛函分析", "算子代数"]
+  path: "files/notes/functional-analysis-ii-operator-theory.pdf"
+
+- title: "现代偏微分方程理论——期末复习笔记"
+  course: "现代偏微分方程"
+  status: "复习笔记"
+  version: "2026.06"
+  date: "2026-06-20"
+  description: "面向课程复习整理的现代偏微分方程理论笔记，涵盖若干核心概念、估计与方法。"
+  categories: ["复习笔记", "偏微分方程", "现代分析"]
+  path: "files/notes/modern-pde-final-review.pdf"

@@ -1,0 +1,51 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "examples/*.qmd"
+  resources:
+    - "files/**"
+    - "images/**"
+    - "assets/spectral.js"
+
+lang: zh
+
+website:
+  title: "SPECTRAL NOTES"
+  description: "Mathematics, structure, spectrum and noncommutative ideas"
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    pinned: true
+    left:
+      - href: index.qmd
+        text: "00 / HOME"
+      - href: about.qmd
+        text: "01 / ABOUT"
+      - href: notes.qmd
+        text: "02 / NOTES"
+  page-footer:
+    left: "STRUCTURE · SPECTRUM · PROBABILITY"
+    right: "QUARTO / GITHUB PAGES"
+    border: true
+  back-to-top-navigation: true
+  open-graph: true
+  twitter-card: true
+
+format:
+  html:
+    theme:
+      - cosmo
+      - assets/styles.scss
+    toc: true
+    toc-title: "ON THIS PAGE"
+    smooth-scroll: true
+    link-external-newwindow: true
+    html-math-method: mathjax
+    code-copy: true
+    anchor-sections: true
+
+execute:
+  freeze: auto

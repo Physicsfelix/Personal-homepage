@@ -1,0 +1,49 @@
+---
+title: "讲义与笔记 Notes"
+description: "公开的课程笔记、专题讲义与综述性材料。"
+page-layout: full
+toc: false
+css: assets/home.css
+listing:
+  contents: data/notes.yml
+  type: grid
+  grid-columns: 3
+  fields: [title, description, course, status, version, date, categories]
+  field-display-names:
+    title: TITLE / 标题
+    description: ABSTRACT
+    course: COURSE / 主题
+    status: STATUS
+    version: VER.
+    date: UPDATED
+  sort: "date desc"
+  sort-ui: [date, title]
+  filter-ui: [title, course, status, categories]
+  page-size: 12
+---
+
+::: {.page-hero .notes-page-hero}
+::: {.page-code}
+02 / NOTE ARCHIVE
+:::
+
+# 讲义与笔记
+
+<p class="page-lead">公开的课程笔记、专题讲义与综述性材料。它们是学习过程中的版本化记录，而不是终稿的陈列柜。</p>
+
+::: {.archive-stats aria-label="讲义归档说明"}
+::: {.archive-stat}
+<span>FORMAT</span><strong>PDF / WEB</strong>
+:::
+::: {.archive-stat}
+<span>VERSIONED</span><strong>YES</strong>
+:::
+::: {.archive-stat}
+<span>ERRORS</span><strong>WELCOME</strong>
+:::
+:::
+:::
+
+::: {.archive-notice}
+除特别说明外，这些内容均为个人学习资料，可能持续修订，不代表课程、教师或院系的官方材料。如发现错误，欢迎指正。
+:::

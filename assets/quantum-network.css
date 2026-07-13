@@ -1,0 +1,60 @@
+/* Interface for quantum-network.js. Tune only these five color variables. */
+.quantum-field {
+  --quantum-edge: #397fc5;
+  --quantum-edge-hot: #078f83;
+  --quantum-node: #285ea8;
+  --quantum-node-hot: #087f75;
+  --quantum-halo: #7457e8;
+
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.quantum-field__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: .56;
+}
+
+/* Keep every real component above the visual-only canvas. */
+.quantum-field > :not(.quantum-field__canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional atmospheric vignette. It adds depth without competing with text. */
+.quantum-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 82% 22%, rgba(22, 184, 212, .10), transparent 30%),
+    radial-gradient(circle at 72% 74%, rgba(116, 87, 232, .09), transparent 34%);
+}
+
+@media (max-width: 719px) {
+  .quantum-field__canvas {
+    opacity: .42;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quantum-field__canvas {
+    opacity: .34;
+  }
+}
+
+@media print {
+  .quantum-field__canvas,
+  .quantum-field::after {
+    display: none !important;
+  }
+}

@@ -1,0 +1,156 @@
+---
+title: "首页"
+page-layout: full
+toc: false
+description: "在结构、谱与概率之间追踪数学。"
+css:
+  - assets/home.css
+  - assets/quantum-network.css
+include-after-body: assets/home-script.html
+---
+
+::: {.hero-viewport .quantum-field data-quantum-field="true" data-seed="1729"}
+<div class="hero-aurora hero-aurora-one" aria-hidden="true"></div>
+<div class="hero-aurora hero-aurora-two" aria-hidden="true"></div>
+
+::: {.hero-inner}
+::: {.hero-eyebrow}
+<span class="signal-dot" aria-hidden="true"></span>
+ACADEMIC SIGNAL / {{< var person.affiliation_zh >}}
+:::
+
+::: {.hero-grid}
+::: {.hero-main data-network-safe="true"}
+::: {.hero-name-block}
+# {{< var person.name_zh >}} {#home-name}
+:::
+
+::: {.hero-name-en}
+{{< var person.name_en >}}
+:::
+
+::: {.hero-role}
+{{< var person.role_zh >}} / {{< var person.role_en >}}
+:::
+
+::: {.hero-statement}
+在量子信息、量子图与场论之间，追踪结构、谱与物理。
+:::
+
+::: {.hero-statement-en}
+Tracing structure, spectra, and physics across quantum theories.
+:::
+
+::: {.hero-actions}
+[ENTER THE NOTES](notes.qmd){.button-primary}
+[ABOUT ME](about.qmd){.button-ghost}
+:::
+:::
+
+::: {.signal-card data-network-safe="true"}
+<p class="signal-card-index">CURRENT SPECTRUM / 2026</p>
+
+::: {.signal-row}
+<span>01</span><strong>Quantum Information</strong>
+:::
+::: {.signal-row}
+<span>02</span><strong>Quantum Mechanics</strong>
+:::
+::: {.signal-row}
+<span>03</span><strong>Quantum Graphs</strong>
+:::
+::: {.signal-row}
+<span>04</span><strong>Quantum Field Theory</strong>
+:::
+:::
+:::
+
+::: {.hero-scroll-cue aria-hidden="true"}
+<span>SCROLL TO EXPLORE</span><i></i>
+:::
+:::
+:::
+
+::: {.spectral-section}
+::: {.section-code}
+01 / CURRENT ORBITS
+:::
+
+## 正在追踪的四条量子轨道
+
+::: {.orbit-grid}
+::: {.orbit-card .orbit-cyan}
+::: {.orbit-number}
+01
+:::
+### 量子信息
+
+量子信道、量子态、信息结构及其数学表达。
+
+<span class="orbit-symbol" aria-hidden="true">ρ</span>
+:::
+
+::: {.orbit-card .orbit-violet}
+::: {.orbit-number}
+02
+:::
+### 量子力学
+
+Hilbert 空间、算符、动力学与量子系统的基本结构。
+
+<span class="orbit-symbol" aria-hidden="true">H</span>
+:::
+
+::: {.orbit-card .orbit-blue}
+::: {.orbit-number}
+03
+:::
+### 量子图
+
+有限维非交换图、量子邻接算子、连通性与谱信息。
+
+<span class="orbit-symbol" aria-hidden="true">σ</span>
+:::
+
+::: {.orbit-card .orbit-magenta}
+::: {.orbit-number}
+04
+:::
+### 量子场论
+
+场、对称性、表示与从量子力学走向场论的数学桥梁。
+
+<span class="orbit-symbol" aria-hidden="true">φ</span>
+:::
+:::
+:::
+
+::: {.spectral-section .notes-portal}
+::: {.section-code}
+02 / OPEN ARCHIVE
+:::
+
+::: {.notes-portal-grid}
+::: {.notes-portal-copy}
+## 讲义不是终点，<br>是思考留下的轨迹。
+
+这里归档我愿意公开的课程讲义、专题笔记与综述性材料。每份内容都会标注状态、版本与更新时间。
+:::
+
+::: {.notes-portal-action}
+[EXPLORE ALL NOTES <span aria-hidden="true">↗</span>](notes.qmd){.portal-link}
+:::
+:::
+:::
+
+::: {.spectral-section .site-manifesto}
+::: {.manifesto-mark aria-hidden="true"}
+∿
+:::
+
+::: {.manifesto-copy}
+<p class="manifesto-label">PERSONAL ACADEMIC ARCHIVE</p>
+
+这个网站不是静态简历，而是一份会持续演化的数学档案：学习、修订、勘误，然后再次理解。
+:::
+:::

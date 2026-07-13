@@ -1,0 +1,21 @@
+---
+title: "示例：第一份讲义"
+description: "演示讲义清单中的条目如何显示。"
+date: 2026-07-12
+toc: true
+toc-title: 示例目录
+---
+
+::: {.callout-warning appearance="simple"}
+这是建站时附带的演示页面，不是一份真实讲义。上传第一份 PDF 后，请在 `data/notes.yml` 中替换或删除对应的示例条目。
+:::
+
+## 可以展示数学公式
+
+行内公式可以写成 `$e^{i\pi}+1=0$`，显示公式可以写成
+
+$$
+\langle Tx,y\rangle = \langle x,T^*y\rangle.
+$$
+
+真正的讲义可以直接以 PDF 形式上传；这个页面只用于确认网站的公式、目录和正文样式均能正常工作。

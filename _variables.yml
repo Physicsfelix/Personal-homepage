@@ -1,0 +1,18 @@
+# ================================================================
+# 个人资料唯一入口
+# 把引号中的占位文字换成你的真实信息即可。
+# 不想公开的字段可以写成空字符串 ""，并在发布前检查页面。
+# ================================================================
+
+person:
+  name_zh: "宋志恒"
+  name_en: "Physicsfelix"
+  role_zh: "数学专业本科生 · 数学物理方向"
+  role_en: "Undergraduate in Mathematical Physics"
+  affiliation_zh: "华东师范大学"
+  affiliation_en: "East China Normal University"
+  location: "上海，中国"
+  email: "10234503019@stu.ecnu.edu.cn"
+  email_url: "mailto:10234503019@stu.ecnu.edu.cn"
+  bio_zh: "我目前在华东师范大学学习数学，方向为数学物理，主要关注量子信息、量子力学、量子图与量子场论，并以算子代数、谱理论和量子概率等作为重要的数学工具与背景。"
+  bio_en: "I study mathematical physics at East China Normal University, with primary interests in quantum information, quantum mechanics, quantum graphs, and quantum field theory."

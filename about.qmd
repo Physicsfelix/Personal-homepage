@@ -1,0 +1,120 @@
+---
+title: "关于 About"
+description: "个人简介、数学兴趣与公开联系方式。"
+toc: false
+page-layout: full
+css: assets/home.css
+---
+
+::: {.page-hero}
+::: {.page-code}
+01 / PROFILE
+:::
+
+::: {.profile-hero-grid}
+::: {.profile-main}
+::: {.profile-name}
+# {{< var person.name_zh >}} {#about-name}
+:::
+
+::: {.profile-name-en}
+{{< var person.name_en >}}
+:::
+
+::: {.profile-role}
+{{< var person.role_zh >}} · {{< var person.affiliation_zh >}}
+:::
+
+::: {.profile-bio}
+{{< var person.bio_zh >}}
+:::
+:::
+
+::: {.profile-side}
+::: {.profile-photo-frame}
+<img src="images/profile-photo.jpg" alt="宋志恒的个人照片" class="profile-photo">
+:::
+
+::: {.profile-aside}
+<span class="profile-aside-label">COORDINATES</span>
+
+::: {.profile-coordinate}
+**FIELD**<br>
+数学物理 / Mathematical Physics
+:::
+
+::: {.profile-coordinate}
+**LOCATION**<br>
+{{< var person.location >}}
+:::
+
+::: {.profile-coordinate}
+**EMAIL**<br>
+[{{< var person.email >}}]({{< var person.email_url >}})
+:::
+
+:::
+:::
+:::
+:::
+
+::: {.page-section}
+::: {.section-code}
+01.1 / STATEMENT
+:::
+
+{{< include _content/about.md >}}
+:::
+
+::: {.page-section}
+::: {.section-code}
+01.2 / INTEREST MATRIX
+:::
+
+## 当前学术兴趣 {.interest-section}
+
+::: {.interest-matrix}
+::: {.interest-cell}
+::: {.interest-label}
+QUANTUM INFORMATION
+:::
+### 量子信息
+
+关注量子态、量子信道、信息结构以及它们的算子论表达。
+:::
+
+::: {.interest-cell}
+::: {.interest-label}
+QUANTUM MECHANICS
+:::
+### 量子力学
+
+关注 Hilbert 空间、算符、谱、对称性与量子动力学。
+:::
+
+::: {.interest-cell}
+::: {.interest-label}
+QUANTUM GRAPHS
+:::
+### 量子图
+
+目前重点学习有限维非交换图、量子关系与量子邻接算子。
+:::
+
+::: {.interest-cell}
+::: {.interest-label}
+QUANTUM FIELD THEORY
+:::
+### 量子场论
+
+关注从量子力学通往场、对称性和表示理论的数学结构。
+:::
+:::
+
+<p class="content-note">分析、算子代数、谱理论、量子概率与非交换几何是支撑这些方向的重要数学背景。这里的“兴趣”表示当前希望继续学习和探索的方向，不等同于已经形成的研究成果。</p>
+:::
+
+::: {.page-section .edit-reminder}
+<span class="edit-reminder-code">EDIT / PUBLISH</span>
+发布前，请在 `_variables.yml` 中填写或删除占位信息。不要公开手机号、微信、家庭住址或其他不必要的私人信息。
+:::

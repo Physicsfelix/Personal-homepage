@@ -1,0 +1,11 @@
+# 复制下面整段（从减号开始）到 data/notes.yml 的末尾。
+# 文件名尽量只使用小写英文字母、数字和连字符，例如 real-analysis-notes.pdf。
+
+- title: "[讲义标题]"
+  course: "[课程或主题]"
+  status: "草稿"
+  version: "v0.1"
+  date: "YYYY-MM-DD"
+  description: "[用一两句话说明这份材料的内容]"
+  categories: ["课程笔记", "数学"]
+  path: "files/notes/your-file-name.pdf"
