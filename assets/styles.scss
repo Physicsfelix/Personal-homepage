@@ -104,8 +104,7 @@ pre,
 .signal-card-index,
 .orbit-number,
 .profile-aside-label,
-.archive-stat span,
-.edit-reminder-code {
+.archive-stat span {
   font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
 }
 
@@ -838,12 +837,51 @@ main.content > section:not(.hero-viewport):not(.spectral-section):not(.page-hero
   border-bottom: 1px solid var(--border);
 }
 
-.page-section > section:not(.interest-cell):not(.interest-section) {
+.page-section > section:not(.interest-cell):not(.interest-section):not(.statement-section) {
   max-width: 70ch;
+}
+
+.page-section > section.statement-section {
+  max-width: none;
 }
 
 .page-section > section.interest-section {
   max-width: none;
+}
+
+.statement-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(18rem, .75fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.statement-main {
+  max-width: 72ch;
+}
+
+.statement-main > p:first-child,
+.statement-note > p:last-child {
+  margin-top: 0;
+}
+
+.statement-note {
+  padding: clamp(1.35rem, 3vw, 2rem);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.statement-note-label {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--cyan);
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .1em;
 }
 
 .page-section p,
@@ -858,7 +896,9 @@ main.content > section:not(.hero-viewport):not(.spectral-section):not(.page-hero
 }
 
 .interest-cell {
-  min-height: 14rem;
+  display: flex;
+  min-height: 12rem;
+  flex-direction: column;
 }
 
 .interest-label {
@@ -866,6 +906,7 @@ main.content > section:not(.hero-viewport):not(.spectral-section):not(.page-hero
   font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
   font-size: .64rem;
   letter-spacing: .1em;
+  white-space: nowrap;
 }
 
 .interest-label > p {
@@ -874,7 +915,7 @@ main.content > section:not(.hero-viewport):not(.spectral-section):not(.page-hero
 }
 
 .interest-cell h3 {
-  margin: 3rem 0 .7rem;
+  margin: 2rem 0 .65rem;
   color: var(--text);
   font-size: 1.25rem;
 }
@@ -886,31 +927,10 @@ main.content > section:not(.hero-viewport):not(.spectral-section):not(.page-hero
 }
 
 .content-note {
-  max-width: 66ch;
+  max-width: 92ch;
   margin: 2rem 0 0;
   color: var(--text-faint) !important;
   font-size: .88rem;
-}
-
-.edit-reminder {
-  padding-top: 2.2rem;
-  padding-bottom: 2.2rem;
-  color: var(--text-soft);
-  font-size: .9rem;
-}
-
-.edit-reminder > p {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1rem 2rem;
-  margin: 0;
-}
-
-.edit-reminder-code {
-  color: var(--gold);
-  font-size: .66rem;
-  font-weight: 700;
-  letter-spacing: .08em;
 }
 
 .notes-page-hero h1 {
@@ -1157,12 +1177,6 @@ footer.footer {
   55%, 100% { transform: translateX(100%); }
 }
 
-@media (min-width: 961px) {
-  .interest-matrix {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 960px) {
   .hero-grid,
   .profile-hero-grid {
@@ -1173,6 +1187,14 @@ footer.footer {
   .profile-side,
   .profile-aside {
     max-width: 36rem;
+  }
+
+  .statement-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .statement-note {
+    max-width: 42rem;
   }
 
   .orbit-grid {
@@ -1262,8 +1284,7 @@ footer.footer {
     margin-bottom: 2.7rem;
   }
 
-  .site-manifesto,
-  .edit-reminder > p {
+  .site-manifesto {
     grid-template-columns: 1fr;
   }
 

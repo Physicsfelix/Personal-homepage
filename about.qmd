@@ -113,8 +113,3 @@ QUANTUM FIELD THEORY
 
 <p class="content-note">分析、算子代数、谱理论、量子概率与非交换几何是支撑这些方向的重要数学背景。这里的“兴趣”表示当前希望继续学习和探索的方向，不等同于已经形成的研究成果。</p>
 :::
-
-::: {.page-section .edit-reminder}
-<span class="edit-reminder-code">EDIT / PUBLISH</span>
-发布前，请在 `_variables.yml` 中填写或删除占位信息。不要公开手机号、微信、家庭住址或其他不必要的私人信息。
-:::
