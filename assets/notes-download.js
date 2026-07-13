@@ -7,20 +7,53 @@ const defaultSleep = (milliseconds) => new Promise((resolve) => setTimeout(resol
 
 export function buildMirrorUrl(relativeHref, mirrorBase) {
   const cleanPath = relativeHref.split(/[?#]/, 1)[0].replace(/^\.\//, '');
-  const segments = cleanPath.split('/');
-  if (!cleanPath.startsWith('files/notes/') || !cleanPath.toLowerCase().endsWith('.pdf') || segments.includes('..')) {
+  if (cleanPath.includes('\\') || /%(?:2f|5c)/i.test(cleanPath)) {
+    throw new Error('download path must be a files/notes PDF');
+  }
+  let decodedPath;
+  try {
+    decodedPath = decodeURIComponent(cleanPath);
+  } catch {
+    throw new Error('download path must be a files/notes PDF');
+  }
+  const segments = decodedPath.split('/');
+  if (!decodedPath.startsWith('files/notes/') || !decodedPath.toLowerCase().endsWith('.pdf') || segments.includes('..')) {
     throw new Error('download path must be a files/notes PDF');
   }
   return new URL(cleanPath, mirrorBase).href;
 }
 
-async function fetchWithTimeout(url, init, fetchImpl, timeoutMs) {
+function createAttemptController(timeoutMs, parentSignal) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const abortFromParent = () => controller.abort(parentSignal?.reason);
+  if (parentSignal?.aborted) abortFromParent();
+  else parentSignal?.addEventListener('abort', abortFromParent, { once: true });
+  const timer = setTimeout(() => {
+    const error = new Error(`request timed out after ${timeoutMs} ms`);
+    error.name = 'TimeoutError';
+    controller.abort(error);
+  }, timeoutMs);
+  return {
+    signal: controller.signal,
+    dispose: () => {
+      clearTimeout(timer);
+      parentSignal?.removeEventListener('abort', abortFromParent);
+    },
+  };
+}
+
+function throwIfAborted(signal) {
+  if (!signal?.aborted) return;
+  if (signal.reason instanceof Error) throw signal.reason;
+  throw new Error('download aborted');
+}
+
+async function fetchWithTimeout(url, init, fetchImpl, timeoutMs) {
+  const attempt = createAttemptController(timeoutMs);
   try {
-    return await fetchImpl(url, { ...init, signal: controller.signal });
+    return await fetchImpl(url, { ...init, signal: attempt.signal });
   } finally {
-    clearTimeout(timer);
+    attempt.dispose();
   }
 }
 
@@ -35,20 +68,30 @@ export async function discoverContentLength(pageUrl, {
   return totalBytes;
 }
 
-async function fetchRange(url, start, end, fetchImpl, timeoutMs) {
-  const response = await fetchWithTimeout(
-    url,
-    { headers: { Range: `bytes=${start}-${end}` }, cache: 'no-store' },
-    fetchImpl,
-    timeoutMs,
-  );
-  if (response.status !== 206) throw new Error(`range request failed with ${response.status}`);
-  const bytes = new Uint8Array(await response.arrayBuffer());
-  const expectedLength = end - start + 1;
-  if (bytes.byteLength !== expectedLength) {
-    throw new Error(`expected ${expectedLength} bytes, received ${bytes.byteLength}`);
+async function fetchRange(url, start, end, fetchImpl, timeoutMs, parentSignal) {
+  const attempt = createAttemptController(timeoutMs, parentSignal);
+  try {
+    throwIfAborted(attempt.signal);
+    const response = await fetchImpl(
+      url,
+      {
+        headers: { Range: `bytes=${start}-${end}` },
+        cache: 'no-store',
+        signal: attempt.signal,
+      },
+    );
+    throwIfAborted(attempt.signal);
+    if (response.status !== 206) throw new Error(`range request failed with ${response.status}`);
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    throwIfAborted(attempt.signal);
+    const expectedLength = end - start + 1;
+    if (bytes.byteLength !== expectedLength) {
+      throw new Error(`expected ${expectedLength} bytes, received ${bytes.byteLength}`);
+    }
+    return bytes;
+  } finally {
+    attempt.dispose();
   }
-  return bytes;
 }
 
 export async function fetchRangeWithFallback({
@@ -59,15 +102,21 @@ export async function fetchRangeWithFallback({
   attempts = ATTEMPTS_PER_SOURCE,
   timeoutMs = REQUEST_TIMEOUT_MS,
   sleepImpl = defaultSleep,
+  signal,
 }) {
   let lastError;
   for (const url of urls) {
     for (let attempt = 1; attempt <= attempts; attempt += 1) {
+      throwIfAborted(signal);
       try {
-        return await fetchRange(url, start, end, fetchImpl, timeoutMs);
+        return await fetchRange(url, start, end, fetchImpl, timeoutMs, signal);
       } catch (error) {
+        throwIfAborted(signal);
         lastError = error;
-        if (attempt < attempts) await sleepImpl(250 * attempt);
+        if (attempt < attempts) {
+          await sleepImpl(250 * attempt);
+          throwIfAborted(signal);
+        }
       }
     }
   }
@@ -95,17 +144,26 @@ export async function retrievePdf({
   const parts = new Array(ranges.length);
   let cursor = 0;
   let completedBytes = 0;
+  const downloadController = new AbortController();
   const worker = async () => {
-    while (cursor < ranges.length) {
-      const index = cursor;
-      cursor += 1;
-      const { start, end } = ranges[index];
-      const part = await fetchRangeWithFallback({
-        urls: [mirrorUrl, pageUrl], start, end, fetchImpl, attempts, timeoutMs, sleepImpl,
-      });
-      parts[index] = part;
-      completedBytes += part.byteLength;
-      onProgress(Math.round((completedBytes / totalBytes) * 100), completedBytes, totalBytes);
+    try {
+      while (cursor < ranges.length) {
+        throwIfAborted(downloadController.signal);
+        const index = cursor;
+        cursor += 1;
+        const { start, end } = ranges[index];
+        const part = await fetchRangeWithFallback({
+          urls: [mirrorUrl, pageUrl], start, end, fetchImpl, attempts, timeoutMs, sleepImpl,
+          signal: downloadController.signal,
+        });
+        throwIfAborted(downloadController.signal);
+        parts[index] = part;
+        completedBytes += part.byteLength;
+        onProgress(Math.round((completedBytes / totalBytes) * 100), completedBytes, totalBytes);
+      }
+    } catch (error) {
+      if (!downloadController.signal.aborted) downloadController.abort(error);
+      throw error;
     }
   };
   await Promise.all(Array.from({ length: Math.min(concurrency, ranges.length) }, () => worker()));
@@ -144,7 +202,8 @@ function createActionLink(documentRef, label, href, extraClass) {
 }
 
 function noteFilename(relativeHref) {
-  return decodeURIComponent(relativeHref.split(/[?#]/, 1)[0].split('/').at(-1));
+  const segments = relativeHref.split(/[?#]/, 1)[0].split('/');
+  return decodeURIComponent(segments[segments.length - 1]);
 }
 
 function replaceWithOrdinaryDownload(button, mirrorUrl, documentRef) {
