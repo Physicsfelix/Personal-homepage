@@ -997,6 +997,64 @@ main.content > section:not(.hero-viewport):not(.spectral-section):not(.page-hero
   margin: 0 auto clamp(5rem, 10vw, 9rem);
 }
 
+.quarto-listing .g-col-1 {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.quarto-listing .quarto-grid-link {
+  flex: 1;
+}
+
+.note-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .65rem;
+  margin-top: .65rem;
+}
+
+.note-action {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: .7rem 1rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, .88);
+  border: 1px solid var(--border);
+  border-radius: .7rem;
+  box-shadow: var(--shadow-soft);
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.note-action:hover,
+.note-action:focus-visible {
+  color: var(--violet);
+  border-color: var(--border-hot);
+}
+
+.note-action-download {
+  color: #fff;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  border-color: transparent;
+}
+
+.note-action-download:hover,
+.note-action-download:focus-visible {
+  color: #fff;
+}
+
+.note-action-download:disabled {
+  opacity: .72;
+  cursor: wait;
+}
+
 .quarto-listing-filter,
 .quarto-listing-sort {
   margin-bottom: 1.2rem;
@@ -1211,6 +1269,10 @@ footer.footer {
 }
 
 @media (max-width: 720px) {
+  .note-card-actions {
+    grid-template-columns: 1fr;
+  }
+
   .navbar-collapse {
     margin-top: .75rem;
     padding: .75rem;

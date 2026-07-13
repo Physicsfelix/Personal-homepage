@@ -28,10 +28,15 @@ function Test-Photo {
 }
 
 function Test-Theme {
+  Assert-True (Test-Path (Join-Path $root 'assets/notes-download.js') -PathType Leaf) 'download module is missing'
+  Assert-True (Test-Path (Join-Path $root 'assets/notes-script.html') -PathType Leaf) 'Notes module loader is missing'
   $style = Read-Text 'assets/styles.scss'
   $indexSource = Read-Text 'index.qmd'
   $notesData = Read-Text 'data/notes.yml'
   $notesSource = Read-Text 'notes.qmd'
+  $notesDownload = Read-Text 'assets/notes-download.js'
+  $notesLoader = Read-Text 'assets/notes-script.html'
+  $quartoConfig = Read-Text '_quarto.yml'
   $readme = Read-Text 'README.md'
   $noteTemplate = Read-Text '_templates/note-entry.yml'
   $approvedNotes = @(
@@ -91,6 +96,16 @@ function Test-Theme {
   Assert-True (([regex]::Matches($notesData, 'status:\s*"持续修订"')).Count -eq 3) 'continuous-revision status count is not three'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"复习笔记"')).Count -eq 1) 'review-note status count is not one'
   Assert-True (-not $notesSource.Contains('archive-empty-guidance')) 'empty archive guidance remains after publication'
+  Assert-Contains $notesSource 'assets/notes-script.html' 'Notes page does not load its download enhancement'
+  Assert-Contains $notesSource 'id="note-download-config"' 'Notes page lacks the download configuration element'
+  Assert-Contains $notesSource 'https://raw.githubusercontent.com/Physicsfelix/Personal-homepage/main/' 'Notes page lacks the raw GitHub fallback base'
+  Assert-Contains $notesLoader 'type="module"' 'Notes loader is not an ES module'
+  Assert-Contains $notesLoader 'assets/notes-download.js' 'Notes loader does not reference the download module'
+  Assert-Contains $quartoConfig 'assets/notes-download.js' 'Quarto resources omit the download module'
+  Assert-Contains $notesDownload 'export const CHUNK_SIZE = 64 * 1024;' 'download chunk size is not 64 KiB'
+  Assert-Contains $notesDownload 'export const MAX_CONCURRENCY = 3;' 'download concurrency is not three'
+  Assert-Contains $notesDownload 'export const ATTEMPTS_PER_SOURCE = 3;' 'download attempts are not three per source'
+  Assert-Contains $notesDownload 'export const REQUEST_TIMEOUT_MS = 25_000;' 'download timeout is not 25 seconds'
   $projectNotePdfs = @(Get-ChildItem (Join-Path $root 'files/notes') -File -Filter '*.pdf')
   Assert-True ($projectNotePdfs.Count -eq 4) 'project does not contain exactly four public note PDFs'
   foreach ($note in $approvedNotes) {
@@ -158,6 +173,9 @@ function Test-Rendered {
   Assert-Contains $notFoundHtml 'class="button-ghost"' 'rendered 404 return link does not use button-ghost'
   Assert-True (-not $notFoundHtml.Contains('button-secondary')) 'rendered 404 still uses undefined button-secondary'
   $notesHtml = Read-Text '_site/notes.html'
+  Assert-Contains $notesHtml 'id="note-download-config"' 'rendered Notes page lacks download configuration'
+  Assert-Contains $notesHtml 'assets/notes-download.js' 'rendered Notes page does not load the download module'
+  Assert-True (([regex]::Matches($notesHtml, 'class="quarto-grid-link"')).Count -eq 4) 'rendered Notes page no longer has exactly four source cards'
   Assert-True (-not $notesHtml.Contains('示例：第一份讲义')) 'demo note remains visible in the public listing'
   $approvedRenderedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },

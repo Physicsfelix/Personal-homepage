@@ -8,6 +8,7 @@ project:
     - "files/**"
     - "images/**"
     - "assets/spectral.js"
+    - "assets/notes-download.js"
 
 lang: zh
 

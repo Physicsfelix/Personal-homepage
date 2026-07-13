@@ -4,6 +4,9 @@ description: "公开的课程笔记、专题讲义与综述性材料。"
 page-layout: full
 toc: false
 css: assets/home.css
+format:
+  html:
+    include-after-body: assets/notes-script.html
 listing:
   contents: data/notes.yml
   type: grid
@@ -43,6 +46,10 @@ listing:
 :::
 :::
 :::
+
+<div id="note-download-config"
+     data-mirror-base="https://raw.githubusercontent.com/Physicsfelix/Personal-homepage/main/"
+     hidden></div>
 
 ::: {.archive-notice}
 除特别说明外，这些内容均为个人学习资料，可能持续修订，不代表课程、教师或院系的官方材料。如发现错误，欢迎指正。
