@@ -28,8 +28,8 @@
 - title: "现代偏微分方程理论——期末复习笔记"
   course: "现代偏微分方程"
   status: "复习笔记"
-  version: "2026.06"
-  date: "2026-06-20"
+  version: "2026.07"
+  date: "2026-07-15"
   description: "面向课程复习整理的现代偏微分方程理论笔记，涵盖若干核心概念、估计与方法。"
   categories: ["复习笔记", "偏微分方程", "现代分析"]
   path: "files/notes/modern-pde-final-review.pdf"
