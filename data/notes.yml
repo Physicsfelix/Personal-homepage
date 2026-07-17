@@ -18,12 +18,30 @@
 
 - title: "泛函分析 II：算子理论——算子代数与算子谱理论"
   course: "算子理论与算子代数"
-  status: "持续修订"
+  status: "已完成"
   version: "2026.07"
-  date: "2026-07-04"
-  description: "围绕算子谱理论、C* 代数与 von Neumann 代数整理；末章仍有 10 处交叉引用标记待修复。"
+  date: "2026-07-17"
+  description: "系统讲述 Banach 代数、C* 代数、von Neumann 代数、有界与无界算子以及非交换测度，共六章。"
   categories: ["学习笔记", "泛函分析", "算子代数"]
   path: "files/notes/functional-analysis-ii-operator-theory.pdf"
+
+- title: "丘成桐大学生数学竞赛数学物理历年题解（非官方）"
+  course: "数学竞赛题解"
+  status: "校订稿"
+  version: "2026.07"
+  date: "2026-07-17"
+  description: "汇编 2022–2026 年笔试与 2022–2025 年总决赛数学物理题解；为非官方民间整理。"
+  categories: ["题解汇编", "数学竞赛", "数学物理"]
+  path: "files/notes/yau-mathematical-physics-solutions.pdf"
+
+- title: "丘成桐大学生数学竞赛概率与统计历年题解（非官方）"
+  course: "数学竞赛题解"
+  status: "校订稿"
+  version: "2026.07"
+  date: "2026-07-17"
+  description: "汇编 2010–2026 年笔试与 2012–2025 年总决赛概率与统计题解；为非官方民间整理。"
+  categories: ["题解汇编", "数学竞赛", "概率统计"]
+  path: "files/notes/yau-probability-statistics-solutions.pdf"
 
 - title: "现代偏微分方程理论——期末复习笔记"
   course: "现代偏微分方程"
