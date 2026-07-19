@@ -51,3 +51,12 @@
   description: "面向课程复习整理的现代偏微分方程理论笔记，涵盖若干核心概念、估计与方法。"
   categories: ["复习笔记", "偏微分方程", "现代分析"]
   path: "files/notes/modern-pde-final-review.pdf"
+
+- title: "矢量分析与微分几何"
+  course: "矢量分析与微分几何"
+  status: "正在写作"
+  version: "2026.07"
+  date: "2026-07-19"
+  description: "从向量值函数的微分与积分展开，后续章节将覆盖场论初步、曲线论与曲面论；当前完成第一章「矢量分析」，全书正在写作中。"
+  categories: ["讲义", "微分几何", "数学物理"]
+  path: "files/notes/vector-analysis-and-differential-geometry.pdf"
