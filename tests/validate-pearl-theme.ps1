@@ -42,7 +42,7 @@ function Test-Theme {
   $approvedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Target = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations.pdf'; Target = 'files/notes/functional-analysis-i-foundations.pdf'; Hash = '6874D1EE752E8160BA82F9DAEB05966DD40E69E540912DFD3EDA05FD8A569233' },
-    [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Target = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = '46129B6689855EF979645FB30F930CE816D0821E6B8F452530CDBA5137522145' },
+    [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Target = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
     [pscustomobject]@{ Path = 'files/notes/yau-mathematical-physics-solutions.pdf'; Target = 'files/notes/yau-mathematical-physics-solutions.pdf'; Hash = 'EA6DDCE10AF948C33AD74B5EC5335881E7E6BA1EB8C2761417D10A9ACD5CD66A' },
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Target = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
     [pscustomobject]@{ Path = 'files/notes/modern-pde-final-review.pdf'; Target = 'files/notes/modern-pde-final-review.pdf'; Hash = 'EEABDA16EEDDABCD8AEEDFD62E6031A9742FD5F4CD5ABB020EBB36241E493A1B' }
@@ -186,7 +186,7 @@ function Test-Rendered {
   $approvedRenderedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations.pdf'; Hash = '6874D1EE752E8160BA82F9DAEB05966DD40E69E540912DFD3EDA05FD8A569233' },
-    [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = '46129B6689855EF979645FB30F930CE816D0821E6B8F452530CDBA5137522145' },
+    [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
     [pscustomobject]@{ Path = 'files/notes/yau-mathematical-physics-solutions.pdf'; Hash = 'EA6DDCE10AF948C33AD74B5EC5335881E7E6BA1EB8C2761417D10A9ACD5CD66A' },
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
     [pscustomobject]@{ Path = 'files/notes/modern-pde-final-review.pdf'; Hash = 'EEABDA16EEDDABCD8AEEDFD62E6031A9742FD5F4CD5ABB020EBB36241E493A1B' }
