@@ -60,3 +60,12 @@
   description: "从向量值函数的微分与积分展开，后续章节将覆盖场论初步、曲线论与曲面论；当前完成第一章「矢量分析」，全书正在写作中。"
   categories: ["讲义", "微分几何", "数学物理"]
   path: "files/notes/vector-analysis-and-differential-geometry.pdf"
+
+- title: "非交换几何导论·第一卷：从黎曼几何到谱几何"
+  course: "非交换几何"
+  status: "校订稿"
+  version: "2026.09"
+  date: "2026-09-10"
+  description: "十三章正文与五个附录：由光滑流形、向量丛、黎曼几何与 Chern–Weil 理论出发，经 Clifford 代数与 Dirac 算子、Sobolev 空间与伪微分算子、椭圆理论与谱三元组，证明闭偶维 Spin 流形上典范扭曲 Dirac 算子的局部指标定理，为学习非交换几何准备经典几何基准；习题留待后续版本补充。"
+  categories: ["讲义", "非交换几何", "微分几何", "指标理论"]
+  path: "files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf"
