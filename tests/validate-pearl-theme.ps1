@@ -41,7 +41,7 @@ function Test-Theme {
   $noteTemplate = Read-Text '_templates/note-entry.yml'
   $approvedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Target = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
-    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations.pdf'; Target = 'files/notes/functional-analysis-i-foundations.pdf'; Hash = '3E33A946F524D91C9C950A6B05B65E788E610B463C94F44357F60E93AAC9D519' },
+    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations.pdf'; Target = 'files/notes/functional-analysis-i-foundations.pdf'; Hash = '180C65DF8F09F5AE21C1A2829F5CD4981DA7F6BD860E4B8241FD601A9064B6D5' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Target = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
     [pscustomobject]@{ Path = 'files/notes/yau-mathematical-physics-solutions.pdf'; Target = 'files/notes/yau-mathematical-physics-solutions.pdf'; Hash = 'EA6DDCE10AF948C33AD74B5EC5335881E7E6BA1EB8C2761417D10A9ACD5CD66A' },
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Target = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
@@ -103,7 +103,7 @@ function Test-Theme {
   }
   Assert-True (-not [regex]::IsMatch($notesData, '(?i)quantum[-_ ]?graph|量子图')) 'notes data contains a quantum-graph publication'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"持续修订"')).Count -eq 1) 'continuous-revision status count is not one'
-  Assert-True (([regex]::Matches($notesData, 'status:\s*"合订稿"')).Count -eq 1) 'collected-draft status count is not one'
+  Assert-True (([regex]::Matches($notesData, 'status:\s*"整编稿"')).Count -eq 1) 'consolidated-draft status count is not one'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"复习笔记"')).Count -eq 1) 'review-note status count is not one'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"已完成"')).Count -eq 1) 'completed status count is not one'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"校订稿"')).Count -eq 3) 'revised-draft status count is not three'
@@ -130,14 +130,18 @@ function Test-Theme {
   Assert-Contains $readme '宋志恒 / Physicsfelix' 'README identity is missing'
   Assert-Contains $readme 'https://physicsfelix.github.io/Personal-homepage/' 'README live site URL is missing'
   Assert-Contains $readme '量子图材料不在本次公开范围内' 'README quantum-graph exclusion is missing'
-  Assert-Contains $readme '泛函分析 I 现为第一至第九章的 575 页合订稿，合订本版本为 v0.1' 'README Functional Analysis I collected-draft disclosure is missing'
+  Assert-Contains $readme '泛函分析 I 现为第一至第九章整编版 v0.2' 'README Functional Analysis I consolidated-draft disclosure is missing'
+  Assert-Contains $readme '| 泛函分析 I：基础理论——现代分析之门 | 整编稿 | 2026.10 · v0.2 |' 'README Functional Analysis I status and version row is missing'
+  Assert-Contains $readme '全书共 560 页（统一封面 1 页、全书目录 4 页、正文 555 页）' 'README Functional Analysis I page-count disclosure is missing'
+  Assert-Contains $readme '正文（含阅读说明）采用 1—555 连续页码' 'README Functional Analysis I continuous-pagination disclosure is missing'
+  Assert-Contains $readme '移除分册封面和局部目录，保留各章阅读说明' 'README Functional Analysis I consolidation disclosure is missing'
   Assert-Contains $readme '第一章原稿为 v0.2，第二至第九章原稿为 v0.1' 'README Functional Analysis I source-version disclosure is missing'
   Assert-True (-not $readme.Contains('10 处交叉引用标记待修复')) 'README still marks Functional Analysis II as incomplete'
   Assert-Contains $noteTemplate 'path: "files/notes/your-file-name.pdf"' 'note-entry template does not use the Pages-safe example path'
   Assert-True (-not $noteTemplate.Contains('../files/notes/')) 'note-entry template still contains the escaping ../files/notes/ path'
   foreach ($entry in @(
     [pscustomobject]@{ Title = '非交换积分——从冯诺依曼代数到非交换 Lp 空间'; Status = '持续修订' },
-    [pscustomobject]@{ Title = '泛函分析 I：基础理论——现代分析之门'; Status = '合订稿' },
+    [pscustomobject]@{ Title = '泛函分析 I：基础理论——现代分析之门'; Status = '整编稿' },
     [pscustomobject]@{ Title = '泛函分析 II：算子理论——算子代数与算子谱理论'; Status = '已完成' },
     [pscustomobject]@{ Title = '丘成桐大学生数学竞赛数学物理历年题解（非官方）'; Status = '校订稿' },
     [pscustomobject]@{ Title = '丘成桐大学生数学竞赛概率与统计历年题解（非官方）'; Status = '校订稿' },
@@ -203,7 +207,7 @@ function Test-Rendered {
   Assert-True (-not $notesHtml.Contains('示例：第一份讲义')) 'demo note remains visible in the public listing'
   $approvedRenderedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
-    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations.pdf'; Hash = '3E33A946F524D91C9C950A6B05B65E788E610B463C94F44357F60E93AAC9D519' },
+    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations.pdf'; Hash = '180C65DF8F09F5AE21C1A2829F5CD4981DA7F6BD860E4B8241FD601A9064B6D5' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
     [pscustomobject]@{ Path = 'files/notes/yau-mathematical-physics-solutions.pdf'; Hash = 'EA6DDCE10AF948C33AD74B5EC5335881E7E6BA1EB8C2761417D10A9ACD5CD66A' },
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
