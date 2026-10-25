@@ -47,7 +47,12 @@ function Test-Theme {
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Target = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
     [pscustomobject]@{ Path = 'files/notes/modern-pde-final-review.pdf'; Target = 'files/notes/modern-pde-final-review.pdf'; Hash = 'EEABDA16EEDDABCD8AEEDFD62E6031A9742FD5F4CD5ABB020EBB36241E493A1B' },
     [pscustomobject]@{ Path = 'files/notes/vector-analysis-and-differential-geometry.pdf'; Target = 'files/notes/vector-analysis-and-differential-geometry.pdf'; Hash = '1CD201EEC85A36B34B8EE736E5491A2FC730B4B8AA93F8EBDE6291EF32C2B2BA' },
-    [pscustomobject]@{ Path = 'files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf'; Target = 'files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf'; Hash = '55F484822571FBCF876CF8709946DABC1996873BC9E8CED94833C2030A31A158' }
+    [pscustomobject]@{ Path = 'files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf'; Target = 'files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf'; Hash = '55F484822571FBCF876CF8709946DABC1996873BC9E8CED94833C2030A31A158' },
+    [pscustomobject]@{ Path = 'files/notes/khalkhali-basic-noncommutative-geometry-zh-v1.0.pdf'; Target = 'files/notes/khalkhali-basic-noncommutative-geometry-zh-v1.0.pdf'; Hash = '69ACFD6EC93A52BC43D1C772995A2C24ADAD029283F49EAED9393C3B4CBD42A0' },
+    [pscustomobject]@{ Path = 'files/notes/hall-quantum-theory-for-mathematicians-zh-v1.0.pdf'; Target = 'files/notes/hall-quantum-theory-for-mathematicians-zh-v1.0.pdf'; Hash = 'AAF44AF1EBBCF28DC5DC48E86AADB3B14E7CA1B30C6F0D221C4701E2FC0B81C2' },
+    [pscustomobject]@{ Path = 'files/notes/conway-functional-analysis-zh-v1.0.pdf'; Target = 'files/notes/conway-functional-analysis-zh-v1.0.pdf'; Hash = 'AA4397F9C749C915A87579DE1AFD7700A39F021E4C3925B1FDFFC68E8113CE49' },
+    [pscustomobject]@{ Path = 'files/notes/rordam-larsen-laustsen-k-theory-zh-v1.0.pdf'; Target = 'files/notes/rordam-larsen-laustsen-k-theory-zh-v1.0.pdf'; Hash = 'B156844A81D7CD725DCA1396585ED2D46F05433D790E43730EE1CF4B1C6209EA' },
+    [pscustomobject]@{ Path = 'files/notes/emerson-cstar-noncommutative-geometry-zh-v1.0.pdf'; Target = 'files/notes/emerson-cstar-noncommutative-geometry-zh-v1.0.pdf'; Hash = 'F23933717D0C1648C2712A4F0671054577345D351CB1F4E28B6B3D9DC8F56E49' }
   )
   $profilePhotoMatch = [regex]::Match($style, '(?ms)^\s*\.profile-photo\s*\{(?<body>.*?)^\s*\}')
   Assert-True $profilePhotoMatch.Success 'profile photo rule is missing'
@@ -91,7 +96,7 @@ function Test-Theme {
   Assert-True (-not $indexSource.Contains('\begin{aligned}')) 'home source still contains the removed aligned formula'
   Assert-True (-not $style.Contains('.signal-formula')) 'stylesheet still contains unused signal-formula rules'
   $pathMatches = [regex]::Matches($notesData, '(?m)^\s*path:\s*"?([^"\r\n]+)"?\s*$')
-  Assert-True ($pathMatches.Count -eq 8) 'notes data does not contain exactly eight paths'
+  Assert-True ($pathMatches.Count -eq 13) 'notes data does not contain exactly thirteen paths'
   $listedPaths = @($pathMatches | ForEach-Object { $_.Groups[1].Value.Trim() })
   foreach ($note in $approvedNotes) {
     Assert-True ($listedPaths -contains $note.Path) "missing exact approved note path $($note.Path)"
@@ -102,6 +107,7 @@ function Test-Theme {
   Assert-True (([regex]::Matches($notesData, 'status:\s*"已完成"')).Count -eq 1) 'completed status count is not one'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"校订稿"')).Count -eq 3) 'revised-draft status count is not three'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"正在写作"')).Count -eq 1) 'in-progress status count is not one'
+  Assert-True (([regex]::Matches($notesData, 'status:\s*"译本 v1\.0"')).Count -eq 5) 'translation v1.0 status count is not five'
   Assert-True (-not $notesSource.Contains('archive-empty-guidance')) 'empty archive guidance remains after publication'
   Assert-Contains $notesSource 'assets/notes-script.html' 'Notes page does not load its download enhancement'
   Assert-Contains $notesSource 'id="note-download-config"' 'Notes page lacks the download configuration element'
@@ -114,7 +120,7 @@ function Test-Theme {
   Assert-Contains $notesDownload 'export const ATTEMPTS_PER_SOURCE = 3;' 'download attempts are not three per source'
   Assert-Contains $notesDownload 'export const REQUEST_TIMEOUT_MS = 25_000;' 'download timeout is not 25 seconds'
   $projectNotePdfs = @(Get-ChildItem (Join-Path $root 'files/notes') -File -Filter '*.pdf')
-  Assert-True ($projectNotePdfs.Count -eq 8) 'project does not contain exactly eight public note PDFs'
+  Assert-True ($projectNotePdfs.Count -eq 13) 'project does not contain exactly thirteen public note PDFs'
   foreach ($note in $approvedNotes) {
     $targetPath = Join-Path $root $note.Target
     Assert-True (Test-Path -LiteralPath $targetPath -PathType Leaf) "approved note PDF is missing: $($note.Target)"
@@ -135,7 +141,12 @@ function Test-Theme {
     [pscustomobject]@{ Title = '丘成桐大学生数学竞赛概率与统计历年题解（非官方）'; Status = '校订稿' },
     [pscustomobject]@{ Title = '现代偏微分方程理论——期末复习笔记'; Status = '复习笔记' },
     [pscustomobject]@{ Title = '矢量分析与微分几何'; Status = '正在写作' },
-    [pscustomobject]@{ Title = '非交换几何导论·第一卷：从黎曼几何到谱几何'; Status = '校订稿' }
+    [pscustomobject]@{ Title = '非交换几何导论·第一卷：从黎曼几何到谱几何'; Status = '校订稿' },
+    [pscustomobject]@{ Title = '基础非交换几何（中文重排译本）'; Status = '译本 v1.0' },
+    [pscustomobject]@{ Title = '面向数学家的量子理论（中文重排译本）'; Status = '译本 v1.0' },
+    [pscustomobject]@{ Title = '泛函分析教程（中文重排译本）'; Status = '译本 v1.0' },
+    [pscustomobject]@{ Title = 'C* 代数 K 理论导论（中文重排译本）'; Status = '译本 v1.0' },
+    [pscustomobject]@{ Title = 'C* 代数与非交换几何导论（中文重排译本）'; Status = '译本 v1.0' }
   )) {
     Assert-True ([regex]::IsMatch($readme, '(?m)^.*' + [regex]::Escape($entry.Title) + '.*' + [regex]::Escape($entry.Status) + '.*$')) "README does not list $($entry.Title) with status $($entry.Status)"
   }
@@ -186,7 +197,7 @@ function Test-Rendered {
   $notesHtml = Read-Text '_site/notes.html'
   Assert-Contains $notesHtml 'id="note-download-config"' 'rendered Notes page lacks download configuration'
   Assert-Contains $notesHtml 'assets/notes-download.js' 'rendered Notes page does not load the download module'
-  Assert-True (([regex]::Matches($notesHtml, 'class="quarto-grid-link"')).Count -eq 8) 'rendered Notes page no longer has exactly eight source cards'
+  Assert-True (([regex]::Matches($notesHtml, 'class="quarto-grid-link"')).Count -eq 13) 'rendered Notes page no longer has exactly thirteen source cards'
   Assert-True (-not $notesHtml.Contains('示例：第一份讲义')) 'demo note remains visible in the public listing'
   $approvedRenderedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
@@ -196,10 +207,15 @@ function Test-Rendered {
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
     [pscustomobject]@{ Path = 'files/notes/modern-pde-final-review.pdf'; Hash = 'EEABDA16EEDDABCD8AEEDFD62E6031A9742FD5F4CD5ABB020EBB36241E493A1B' },
     [pscustomobject]@{ Path = 'files/notes/vector-analysis-and-differential-geometry.pdf'; Hash = '1CD201EEC85A36B34B8EE736E5491A2FC730B4B8AA93F8EBDE6291EF32C2B2BA' },
-    [pscustomobject]@{ Path = 'files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf'; Hash = '55F484822571FBCF876CF8709946DABC1996873BC9E8CED94833C2030A31A158' }
+    [pscustomobject]@{ Path = 'files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf'; Hash = '55F484822571FBCF876CF8709946DABC1996873BC9E8CED94833C2030A31A158' },
+    [pscustomobject]@{ Path = 'files/notes/khalkhali-basic-noncommutative-geometry-zh-v1.0.pdf'; Hash = '69ACFD6EC93A52BC43D1C772995A2C24ADAD029283F49EAED9393C3B4CBD42A0' },
+    [pscustomobject]@{ Path = 'files/notes/hall-quantum-theory-for-mathematicians-zh-v1.0.pdf'; Hash = 'AAF44AF1EBBCF28DC5DC48E86AADB3B14E7CA1B30C6F0D221C4701E2FC0B81C2' },
+    [pscustomobject]@{ Path = 'files/notes/conway-functional-analysis-zh-v1.0.pdf'; Hash = 'AA4397F9C749C915A87579DE1AFD7700A39F021E4C3925B1FDFFC68E8113CE49' },
+    [pscustomobject]@{ Path = 'files/notes/rordam-larsen-laustsen-k-theory-zh-v1.0.pdf'; Hash = 'B156844A81D7CD725DCA1396585ED2D46F05433D790E43730EE1CF4B1C6209EA' },
+    [pscustomobject]@{ Path = 'files/notes/emerson-cstar-noncommutative-geometry-zh-v1.0.pdf'; Hash = 'F23933717D0C1648C2712A4F0671054577345D351CB1F4E28B6B3D9DC8F56E49' }
   )
   $pdfLinkPattern = '(?i)\bhref\s*=\s*["'']files/notes/[^"'']+\.pdf["'']'
-  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 8) 'rendered Notes page does not contain exactly eight PDF link occurrences'
+  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 13) 'rendered Notes page does not contain exactly thirteen PDF link occurrences'
   foreach ($note in $approvedRenderedNotes) {
     $targetLinkPattern = '(?i)\bhref\s*=\s*["'']' + [regex]::Escape($note.Path) + '["'']'
     Assert-True (([regex]::Matches($notesHtml, $targetLinkPattern)).Count -eq 1) "rendered Notes page does not link exactly once to $($note.Path)"
@@ -208,7 +224,7 @@ function Test-Rendered {
     Assert-True ((Get-FileHash -LiteralPath $renderedPath -Algorithm SHA256).Hash -eq $note.Hash) "rendered note PDF hash mismatch: $($note.Path)"
   }
   $renderedNotePdfs = @(Get-ChildItem (Join-Path $root '_site/files/notes') -File -Filter '*.pdf')
-  Assert-True ($renderedNotePdfs.Count -eq 8) 'rendered site does not contain exactly eight note PDFs'
+  Assert-True ($renderedNotePdfs.Count -eq 13) 'rendered site does not contain exactly thirteen note PDFs'
   Assert-True (-not $notesHtml.Contains('archive-empty-guidance')) 'rendered empty archive guidance remains after publication'
   Assert-True (-not [regex]::IsMatch($notesHtml, '(?i)quantum[-_ ]?graph|量子图')) 'rendered Notes page contains a quantum-graph PDF, link, or card'
   $bootstrap = Get-ChildItem (Join-Path $root '_site/site_libs/bootstrap') -Filter 'bootstrap-*.min.css' | Select-Object -First 1
