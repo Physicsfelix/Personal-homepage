@@ -56,3 +56,16 @@ listing:
 
 标注“经典教材译本”的五份材料由我使用 GPT-6 完成中文翻译与重排，条目中列明原作者、版本、PDF 页数和文件大小。可使用下方筛选框搜索“经典教材译本”集中浏览。
 :::
+
+## 李思数学物理讲义 · PDF 与源码
+
+四本讲义依据所列原版完整翻译与重排，由我使用 GPT-6 制作，逐章逐节安排独立审校。正文采用泛函分析 I 模板风格；原稿中的疑点保留原式，并另附译校注。源码包包含全部章节、图表、样式、编译说明和审校记录，已在全新目录重编验证。
+
+| 讲义 | 中文 PDF | 可编译源码 |
+|:--|:--|:--|
+| 统计力学中的数学方法讲义 | [阅读全文 · 138 页（5.80 MB）](files/notes/sili-statistical-mechanics-zh-v1.0.pdf) | [下载源码 ZIP（5.57 MB）](files/notes/sili-statistical-mechanics-zh-v1.0-source.zip) |
+| 经典力学与几何 | [阅读全文 · 183 页（13.28 MB）](files/notes/sili-classical-mechanics-and-geometry-zh-v1.0.pdf) | [下载源码 ZIP（13.73 MB）](files/notes/sili-classical-mechanics-and-geometry-zh-v1.0-source.zip) |
+| 电磁与几何 | [阅读全文 · 178 页（7.37 MB）](files/notes/sili-electromagnetism-and-geometry-zh-v1.0.pdf) | [下载源码 ZIP（6.88 MB）](files/notes/sili-electromagnetism-and-geometry-zh-v1.0-source.zip) |
+| 量子力学与几何 | [阅读全文 · 376 页（10.94 MB）](files/notes/sili-quantum-mechanics-and-geometry-zh-v1.0.pdf) | [下载源码 ZIP（12.81 MB）](files/notes/sili-quantum-mechanics-and-geometry-zh-v1.0-source.zip) |
+
+在下方筛选框搜索“李思数学物理讲义”，可集中浏览这四份译本。

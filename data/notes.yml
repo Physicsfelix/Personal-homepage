@@ -114,3 +114,39 @@
   description: "十三章正文与五个附录：由光滑流形、向量丛、黎曼几何与 Chern–Weil 理论出发，经 Clifford 代数与 Dirac 算子、Sobolev 空间与伪微分算子、椭圆理论与谱三元组，证明闭偶维 Spin 流形上典范扭曲 Dirac 算子的局部指标定理，为学习非交换几何准备经典几何基准；习题留待后续版本补充。"
   categories: ["讲义", "非交换几何", "微分几何", "指标理论"]
   path: "files/notes/noncommutative-geometry-vol1-riemannian-to-spectral.pdf"
+
+- title: "统计力学中的数学方法讲义（中文重排译本）"
+  course: "统计力学与数学物理"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-26"
+  description: "李思（Si Li）原著，依据2026年6月更新稿完整中文翻译与重排，共138页，PDF 5.80 MB。涵盖接触几何、熵与配分函数、热力学极限、Ising 模型、六顶点模型及 Hubbard 模型。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  categories: ["李思数学物理讲义", "中文译排", "数学物理"]
+  path: "files/notes/sili-statistical-mechanics-zh-v1.0.pdf"
+
+- title: "经典力学与几何（中文重排译本）"
+  course: "经典力学与辛几何"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-26"
+  description: "李思（Si Li）原著，依据2023年7月初稿更新版完整中文翻译与重排，共183页，PDF 13.28 MB。由变分原理与 Hamilton 力学进入辛几何，讨论动量映射、辛约化与可积系统。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  categories: ["李思数学物理讲义", "中文译排", "数学物理"]
+  path: "files/notes/sili-classical-mechanics-and-geometry-zh-v1.0.pdf"
+
+- title: "电磁与几何（中文重排译本）"
+  course: "电磁学与几何"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-26"
+  description: "李思（Si Li）原著，依据2023年8月初稿更新版完整中文翻译与重排，共178页，PDF 7.37 MB。从 Maxwell 方程与静态电磁场出发，讨论波动、辐射、纤维丛、规范场与相对论形式。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  categories: ["李思数学物理讲义", "中文译排", "数学物理"]
+  path: "files/notes/sili-electromagnetism-and-geometry-zh-v1.0.pdf"
+
+- title: "量子力学与几何（中文重排译本）"
+  course: "量子力学与几何"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-26"
+  description: "李思（Si Li）原著，依据2025年12月初稿更新版完整中文翻译与重排，共376页，PDF 10.94 MB。涵盖量子力学的 Hilbert 空间表述、路径积分、伪微分算子与谱理论，以及几何量子化、形变量子化与迹映射。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  categories: ["李思数学物理讲义", "中文译排", "数学物理"]
+  path: "files/notes/sili-quantum-mechanics-and-geometry-zh-v1.0.pdf"
