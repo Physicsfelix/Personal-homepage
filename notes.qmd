@@ -54,7 +54,19 @@ listing:
 ::: {.archive-notice}
 除特别说明外，这些内容均为个人学习资料，可能持续修订，不代表课程、教师或院系的官方材料。如发现错误，欢迎指正。
 
-标注“经典教材译本”的五份材料由我使用 GPT-6 完成中文翻译与重排，条目中列明原作者、版本、PDF 页数和文件大小。可使用下方筛选框搜索“经典教材译本”集中浏览。
+标注“经典教材译本”的六份材料由我使用 GPT-6 完成中文翻译与重排，条目中列明原作者、版本、PDF 页数和文件大小。可使用下方筛选框搜索“经典教材译本”集中浏览。
+:::
+
+::: {.archive-notice style="max-width:1120px"}
+
+## 算子代数导论 · PDF 与源码
+
+朱克和（Kehe Zhu）原著，CRC Press，1993。使用 GPT-6 完整中文翻译与重排，涵盖 Banach 代数、C* 代数与 von Neumann 代数，共 26 讲、101 个编号小节及 131 道习题和全部子问。逐讲逐节独立审校；原著疑点保留原有陈述与公式，另附译校注。源码包含完整章节、样式、索引生成工具、编译说明和审校记录，已从实际源码包在全新目录重编验证。
+
+| 译本 | 中文 PDF | 可编译源码 |
+|:--|:--|:--|
+| 算子代数导论 | [阅读全文 · 142 页（0.92 MB）](files/notes/zhu-introduction-to-operator-algebras-zh-v1.0.pdf) | [下载源码 ZIP（1.41 MB）](files/notes/zhu-introduction-to-operator-algebras-zh-v1.0-source.zip) |
+
 :::
 
 ::: {.archive-notice style="max-width:1120px"}

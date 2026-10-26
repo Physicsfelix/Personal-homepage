@@ -1,3 +1,12 @@
+- title: "算子代数导论（中文重排译本）"
+  course: "算子代数与泛函分析"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-26"
+  description: "朱克和（Kehe Zhu）原著（CRC Press，1993）。使用 GPT-6 完整中文翻译与重排，介绍 Banach 代数、C* 代数和 von Neumann 代数；26 讲、101 个编号小节、131 道习题及全部子问。PDF：142 页，0.92 MB。逐节独立审校，可编译源码见本页下载表。"
+  categories: ["经典教材译本", "GPT-6 译制", "算子代数", "泛函分析"]
+  path: "files/notes/zhu-introduction-to-operator-algebras-zh-v1.0.pdf"
+
 - title: "基础非交换几何（中文重排译本）"
   course: "非交换几何"
   status: "译本 v1.0"

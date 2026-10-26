@@ -14,6 +14,7 @@
 
 | 标题 | 状态 | 版本 |
 | --- | --- | --- |
+| 算子代数导论（中文重排译本） | 完整译本 · 独立审校 | 2026.10 · v1.0 |
 | 基础非交换几何（中文重排译本） | 译本 v1.0 | v1.0 |
 | 面向数学家的量子理论（中文重排译本） | 译本 v1.0 | v1.0 |
 | 泛函分析教程（中文重排译本） | 译本 v1.0 | v1.0 |
@@ -32,7 +33,7 @@
 
 泛函分析 I 的当前阅读与下载入口使用独立版本文件名：[v0.2 整编稿 PDF](files/notes/functional-analysis-i-foundations-v0.2-180c65df.pdf)。原文件名保留为兼容入口：[原地址](files/notes/functional-analysis-i-foundations.pdf)，两者提供同一份 560 页 PDF。
 
-五份经典教材中文重排译本由我使用 GPT-6 完成，均为 v1.0，于 2026 年 10 月 25 日加入归档。原作者依次为 Masoud Khalkhali、Brian C. Hall、John B. Conway、M. Rørdam / F. Larsen / N. Laustsen、Heath Emerson；各条目保留原作者署名并提供在线阅读与 PDF 下载。
+六份经典教材中文重排译本由我使用 GPT-6 完成，均为 v1.0。前五份于 2026 年 10 月 25 日加入归档，原作者依次为 Masoud Khalkhali、Brian C. Hall、John B. Conway、M. Rørdam / F. Larsen / N. Laustsen、Heath Emerson；各条目保留原作者署名并提供在线阅读与 PDF 下载。朱克和（Kehe Zhu）的《算子代数导论》于 2026 年 10 月 26 日加入，共 142 页，另提供可编译源码与逐节独立审校记录。
 
 量子图材料不在本次公开范围内。
 
