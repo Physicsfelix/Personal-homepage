@@ -72,12 +72,12 @@
 
 - title: "泛函分析 I：基础理论——现代分析之门"
   course: "泛函分析"
-  status: "整编稿"
-  version: "2026.10 · v0.2"
-  date: "2026-10-25"
-  description: "第一至第九章整编版，共 560 页，涵盖一般点集拓扑、度量空间、赋范空间与 Banach 空间、Hilbert 空间、基本定理、对偶与弱拓扑、局部凸空间、紧凸集与函数逼近、Lp 空间。移除分册封面和局部目录，保留各章阅读说明；正文（含阅读说明）采用 1—555 连续页码，新增统一全书目录与书签。"
+  status: "修订稿"
+  version: "2026.10 · v0.3"
+  date: "2026-10-27"
+  description: "九章基础理论，从一般点集拓扑、度量空间，经 Banach 与 Hilbert 空间、基本定理、对偶与弱拓扑、局部凸空间，至紧凸集、函数逼近和 Lp 空间。采用统一书籍体例，书前集中记号与约定，书末统一参考文献，配全书目录、连续页码与书签。PDF：549 页。"
   categories: ["学习笔记", "泛函分析", "现代分析"]
-  path: "files/notes/functional-analysis-i-foundations-v0.2-180c65df.pdf"
+  path: "files/notes/functional-analysis-i-foundations-v0.3-81bb3ade.pdf"
 
 - title: "泛函分析 II：算子理论——算子代数与算子谱理论"
   course: "算子理论与算子代数"

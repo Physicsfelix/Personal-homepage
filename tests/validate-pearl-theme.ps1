@@ -41,7 +41,7 @@ function Test-Theme {
   $noteTemplate = Read-Text '_templates/note-entry.yml'
   $approvedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Target = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
-    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations-v0.2-180c65df.pdf'; Target = 'files/notes/functional-analysis-i-foundations-v0.2-180c65df.pdf'; Hash = '180C65DF8F09F5AE21C1A2829F5CD4981DA7F6BD860E4B8241FD601A9064B6D5' },
+    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations-v0.3-81bb3ade.pdf'; Target = 'files/notes/functional-analysis-i-foundations-v0.3-81bb3ade.pdf'; Hash = '81BB3ADE89C89F8CA454F7C1FF4B1861C36F583980779B9EB5D417370668FE76' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Target = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
     [pscustomobject]@{ Path = 'files/notes/yau-mathematical-physics-solutions.pdf'; Target = 'files/notes/yau-mathematical-physics-solutions.pdf'; Hash = 'EA6DDCE10AF948C33AD74B5EC5335881E7E6BA1EB8C2761417D10A9ACD5CD66A' },
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Target = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
@@ -96,7 +96,7 @@ function Test-Theme {
   Assert-True (-not $indexSource.Contains('\begin{aligned}')) 'home source still contains the removed aligned formula'
   Assert-True (-not $style.Contains('.signal-formula')) 'stylesheet still contains unused signal-formula rules'
   $pathMatches = [regex]::Matches($notesData, '(?m)^\s*path:\s*"?([^"\r\n]+)"?\s*$')
-  Assert-True ($pathMatches.Count -eq 13) 'notes data does not contain exactly thirteen paths'
+  Assert-True ($pathMatches.Count -eq 19) 'notes data does not contain exactly nineteen paths'
   $listedPaths = @($pathMatches | ForEach-Object { $_.Groups[1].Value.Trim() })
   foreach ($note in $approvedNotes) {
     Assert-True ($listedPaths -contains $note.Path) "missing exact approved note path $($note.Path)"
@@ -104,7 +104,7 @@ function Test-Theme {
   Assert-True ($listedPaths -notcontains 'files/notes/functional-analysis-i-foundations.pdf') 'notes data still links the compatibility filename instead of the current version'
   Assert-True (-not [regex]::IsMatch($notesData, '(?i)quantum[-_ ]?graph|量子图')) 'notes data contains a quantum-graph publication'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"持续修订"')).Count -eq 1) 'continuous-revision status count is not one'
-  Assert-True (([regex]::Matches($notesData, 'status:\s*"整编稿"')).Count -eq 1) 'consolidated-draft status count is not one'
+  Assert-True (([regex]::Matches($notesData, 'status:\s*"修订稿"')).Count -eq 1) 'consolidated-draft status count is not one'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"复习笔记"')).Count -eq 1) 'review-note status count is not one'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"已完成"')).Count -eq 1) 'completed status count is not one'
   Assert-True (([regex]::Matches($notesData, 'status:\s*"校订稿"')).Count -eq 3) 'revised-draft status count is not three'
@@ -122,7 +122,7 @@ function Test-Theme {
   Assert-Contains $notesDownload 'export const ATTEMPTS_PER_SOURCE = 3;' 'download attempts are not three per source'
   Assert-Contains $notesDownload 'export const REQUEST_TIMEOUT_MS = 25_000;' 'download timeout is not 25 seconds'
   $projectNotePdfs = @(Get-ChildItem (Join-Path $root 'files/notes') -File -Filter '*.pdf')
-  Assert-True ($projectNotePdfs.Count -eq 14) 'project does not contain exactly thirteen current note PDFs plus one compatibility PDF'
+  Assert-True ($projectNotePdfs.Count -eq 21) 'project does not contain nineteen current PDFs plus compatibility and archived Functional Analysis I PDFs'
   foreach ($note in $approvedNotes) {
     $targetPath = Join-Path $root $note.Target
     Assert-True (Test-Path -LiteralPath $targetPath -PathType Leaf) "approved note PDF is missing: $($note.Target)"
@@ -130,22 +130,22 @@ function Test-Theme {
   }
   $compatibilityNotePath = Join-Path $root 'files/notes/functional-analysis-i-foundations.pdf'
   Assert-True (Test-Path -LiteralPath $compatibilityNotePath -PathType Leaf) 'Functional Analysis I compatibility PDF is missing'
-  Assert-True ((Get-FileHash -LiteralPath $compatibilityNotePath -Algorithm SHA256).Hash -eq '180C65DF8F09F5AE21C1A2829F5CD4981DA7F6BD860E4B8241FD601A9064B6D5') 'Functional Analysis I compatibility PDF hash mismatch'
+  Assert-True ((Get-FileHash -LiteralPath $compatibilityNotePath -Algorithm SHA256).Hash -eq '81BB3ADE89C89F8CA454F7C1FF4B1861C36F583980779B9EB5D417370668FE76') 'Functional Analysis I compatibility PDF hash mismatch'
   Assert-Contains $readme '宋志恒 / Physicsfelix' 'README identity is missing'
   Assert-Contains $readme 'https://physicsfelix.github.io/Personal-homepage/' 'README live site URL is missing'
   Assert-Contains $readme '量子图材料不在本次公开范围内' 'README quantum-graph exclusion is missing'
-  Assert-Contains $readme '泛函分析 I 现为第一至第九章整编版 v0.2' 'README Functional Analysis I consolidated-draft disclosure is missing'
-  Assert-Contains $readme '| 泛函分析 I：基础理论——现代分析之门 | 整编稿 | 2026.10 · v0.2 |' 'README Functional Analysis I status and version row is missing'
-  Assert-Contains $readme '全书共 560 页（统一封面 1 页、全书目录 4 页、正文 555 页）' 'README Functional Analysis I page-count disclosure is missing'
-  Assert-Contains $readme '正文（含阅读说明）采用 1—555 连续页码' 'README Functional Analysis I continuous-pagination disclosure is missing'
-  Assert-Contains $readme '移除分册封面和局部目录，保留各章阅读说明' 'README Functional Analysis I consolidation disclosure is missing'
+  Assert-Contains $readme '泛函分析 I 现为第一至第九章书籍版 v0.3' 'README Functional Analysis I consolidated-draft disclosure is missing'
+  Assert-Contains $readme '| 泛函分析 I：基础理论——现代分析之门 | 修订稿 | 2026.10 · v0.3 |' 'README Functional Analysis I status and version row is missing'
+  Assert-Contains $readme '全书共 549 页（封面 1 页、目录 4 页、记号与约定 3 页、九章正文 540 页、参考文献 1 页）' 'README Functional Analysis I page-count disclosure is missing'
+  Assert-Contains $readme '正文与书末书目采用 1—541 连续页码' 'README Functional Analysis I continuous-pagination disclosure is missing'
+  Assert-Contains $readme '撤去各章阅读说明，将其中实质数学约定集中于书前' 'README Functional Analysis I consolidation disclosure is missing'
   Assert-Contains $readme '第一章原稿为 v0.2，第二至第九章原稿为 v0.1' 'README Functional Analysis I source-version disclosure is missing'
   Assert-True (-not $readme.Contains('10 处交叉引用标记待修复')) 'README still marks Functional Analysis II as incomplete'
   Assert-Contains $noteTemplate 'path: "files/notes/your-file-name.pdf"' 'note-entry template does not use the Pages-safe example path'
   Assert-True (-not $noteTemplate.Contains('../files/notes/')) 'note-entry template still contains the escaping ../files/notes/ path'
   foreach ($entry in @(
     [pscustomobject]@{ Title = '非交换积分——从冯诺依曼代数到非交换 Lp 空间'; Status = '持续修订' },
-    [pscustomobject]@{ Title = '泛函分析 I：基础理论——现代分析之门'; Status = '整编稿' },
+    [pscustomobject]@{ Title = '泛函分析 I：基础理论——现代分析之门'; Status = '修订稿' },
     [pscustomobject]@{ Title = '泛函分析 II：算子理论——算子代数与算子谱理论'; Status = '已完成' },
     [pscustomobject]@{ Title = '丘成桐大学生数学竞赛数学物理历年题解（非官方）'; Status = '校订稿' },
     [pscustomobject]@{ Title = '丘成桐大学生数学竞赛概率与统计历年题解（非官方）'; Status = '校订稿' },
@@ -207,11 +207,11 @@ function Test-Rendered {
   $notesHtml = Read-Text '_site/notes.html'
   Assert-Contains $notesHtml 'id="note-download-config"' 'rendered Notes page lacks download configuration'
   Assert-Contains $notesHtml 'assets/notes-download.js' 'rendered Notes page does not load the download module'
-  Assert-True (([regex]::Matches($notesHtml, 'class="quarto-grid-link"')).Count -eq 13) 'rendered Notes page no longer has exactly thirteen source cards'
+  Assert-True (([regex]::Matches($notesHtml, 'class="quarto-grid-link"')).Count -eq 19) 'rendered Notes page no longer has exactly nineteen source cards'
   Assert-True (-not $notesHtml.Contains('示例：第一份讲义')) 'demo note remains visible in the public listing'
   $approvedRenderedNotes = @(
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
-    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations-v0.2-180c65df.pdf'; Hash = '180C65DF8F09F5AE21C1A2829F5CD4981DA7F6BD860E4B8241FD601A9064B6D5' },
+    [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations-v0.3-81bb3ade.pdf'; Hash = '81BB3ADE89C89F8CA454F7C1FF4B1861C36F583980779B9EB5D417370668FE76' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
     [pscustomobject]@{ Path = 'files/notes/yau-mathematical-physics-solutions.pdf'; Hash = 'EA6DDCE10AF948C33AD74B5EC5335881E7E6BA1EB8C2761417D10A9ACD5CD66A' },
     [pscustomobject]@{ Path = 'files/notes/yau-probability-statistics-solutions.pdf'; Hash = 'AA668FE2F23579DA41760151776B5D4AAB26B2F26197DF78F8795070D6D51AD9' },
@@ -225,7 +225,7 @@ function Test-Rendered {
     [pscustomobject]@{ Path = 'files/notes/emerson-cstar-noncommutative-geometry-zh-v1.0.pdf'; Hash = 'F23933717D0C1648C2712A4F0671054577345D351CB1F4E28B6B3D9DC8F56E49' }
   )
   $pdfLinkPattern = '(?i)\bhref\s*=\s*["'']files/notes/[^"'']+\.pdf["'']'
-  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 13) 'rendered Notes page does not contain exactly thirteen PDF link occurrences'
+  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 25) 'rendered Notes page does not contain exactly twenty-five PDF link occurrences'
   $compatibilityLinkPattern = '(?i)\bhref\s*=\s*["'']files/notes/functional-analysis-i-foundations\.pdf["'']'
   Assert-True (([regex]::Matches($notesHtml, $compatibilityLinkPattern)).Count -eq 0) 'rendered Notes cards still link the compatibility filename instead of the current version'
   foreach ($note in $approvedRenderedNotes) {
@@ -236,10 +236,10 @@ function Test-Rendered {
     Assert-True ((Get-FileHash -LiteralPath $renderedPath -Algorithm SHA256).Hash -eq $note.Hash) "rendered note PDF hash mismatch: $($note.Path)"
   }
   $renderedNotePdfs = @(Get-ChildItem (Join-Path $root '_site/files/notes') -File -Filter '*.pdf')
-  Assert-True ($renderedNotePdfs.Count -eq 14) 'rendered site does not contain exactly thirteen current note PDFs plus one compatibility PDF'
+  Assert-True ($renderedNotePdfs.Count -eq 21) 'rendered site does not contain nineteen current PDFs plus compatibility and archived Functional Analysis I PDFs'
   $compatibilityRenderedPath = Join-Path $root '_site/files/notes/functional-analysis-i-foundations.pdf'
   Assert-True (Test-Path -LiteralPath $compatibilityRenderedPath -PathType Leaf) 'rendered Functional Analysis I compatibility PDF is missing'
-  Assert-True ((Get-FileHash -LiteralPath $compatibilityRenderedPath -Algorithm SHA256).Hash -eq '180C65DF8F09F5AE21C1A2829F5CD4981DA7F6BD860E4B8241FD601A9064B6D5') 'rendered Functional Analysis I compatibility PDF hash mismatch'
+  Assert-True ((Get-FileHash -LiteralPath $compatibilityRenderedPath -Algorithm SHA256).Hash -eq '81BB3ADE89C89F8CA454F7C1FF4B1861C36F583980779B9EB5D417370668FE76') 'rendered Functional Analysis I compatibility PDF hash mismatch'
   Assert-True (-not $notesHtml.Contains('archive-empty-guidance')) 'rendered empty archive guidance remains after publication'
   Assert-True (-not [regex]::IsMatch($notesHtml, '(?i)quantum[-_ ]?graph|量子图')) 'rendered Notes page contains a quantum-graph PDF, link, or card'
   $bootstrap = Get-ChildItem (Join-Path $root '_site/site_libs/bootstrap') -Filter 'bootstrap-*.min.css' | Select-Object -First 1
