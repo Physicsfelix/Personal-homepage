@@ -54,7 +54,19 @@ listing:
 ::: {.archive-notice}
 除特别说明外，这些内容均为个人学习资料，可能持续修订，不代表课程、教师或院系的官方材料。如发现错误，欢迎指正。
 
-标注“经典教材译本”的六份材料由我使用 GPT-6 完成中文翻译与重排，条目中列明原作者、版本、PDF 页数和文件大小。可使用下方筛选框搜索“经典教材译本”集中浏览。
+标注“经典教材译本”的七份材料由我使用 GPT-6 完成中文翻译与重排，条目中列明原作者、版本、PDF 页数和文件大小。可使用下方筛选框搜索“经典教材译本”集中浏览。
+:::
+
+::: {.archive-notice style="max-width:1120px"}
+
+## 表示论：第一教程 · PDF 与源码 {#fulton-harris-representation-theory}
+
+William Fulton、Joe Harris 原著，Graduate Texts in Mathematics 129。使用 GPT-6 完整中文翻译与重排，正文采用泛函分析 I 模板风格，共 26 讲、6 个附录，并保留习题提示、参考书目、符号索引和总索引。逐讲逐节独立审校；查出的原著疑误以译校注单列，底本中不清晰的索引数字保留缺损标记。源码包含全部章节、图表、样式、编译说明和审校记录，已从最终实际源码包在全新目录重编验证。
+
+| 译本 | 中文 PDF | 可编译源码 |
+|:--|:--|:--|
+| 表示论：第一教程 | [阅读全文 · 472 页（12.49 MB）](files/notes/fulton-harris-representation-theory-zh-v1.0.pdf) | [下载源码 ZIP（18.61 MB）](files/notes/fulton-harris-representation-theory-zh-v1.0-source.zip) |
+
 :::
 
 ::: {.archive-notice style="max-width:1120px"}

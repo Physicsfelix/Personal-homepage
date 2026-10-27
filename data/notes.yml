@@ -1,3 +1,12 @@
+- title: "表示论：第一教程（中文重排译本）"
+  course: "表示论与李群、李代数"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-27"
+  description: "William Fulton、Joe Harris 原著（GTM 129）。使用 GPT-6 完整中文翻译与重排，涵盖有限群与对称群表示、李群与李代数、根系、特征标及 Weyl 公式；26 讲和 6 个附录。PDF：472 页，12.49 MB。逐节独立审校，可编译源码见本页下载表。"
+  categories: ["经典教材译本", "GPT-6 译制", "表示论", "李群与李代数"]
+  path: "files/notes/fulton-harris-representation-theory-zh-v1.0.pdf"
+
 - title: "算子代数导论（中文重排译本）"
   course: "算子代数与泛函分析"
   status: "完整译本 · 独立审校"
