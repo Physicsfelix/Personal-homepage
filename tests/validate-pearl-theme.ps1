@@ -225,7 +225,15 @@ function Test-Rendered {
     [pscustomobject]@{ Path = 'files/notes/emerson-cstar-noncommutative-geometry-zh-v1.0.pdf'; Hash = 'F23933717D0C1648C2712A4F0671054577345D351CB1F4E28B6B3D9DC8F56E49' }
   )
   $pdfLinkPattern = '(?i)\bhref\s*=\s*["'']files/notes/[^"'']+\.pdf["'']'
-  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 25) 'rendered Notes page does not contain exactly twenty-five PDF link occurrences'
+  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 19) 'rendered Notes page does not contain exactly one PDF link for each of the nineteen cards'
+  Assert-True (-not $notesHtml.Contains('archive-notice')) 'rendered Notes page still contains a prepended notice or source-download panel'
+  Assert-True (-not $notesHtml.Contains('notes-page-hero')) 'rendered Notes page still contains the removed custom introduction'
+  $notesTableTags = [regex]::Matches($notesHtml, '(?i)<table\b[^>]*>')
+  $nonCardTables = @($notesTableTags | Where-Object {
+    -not [regex]::IsMatch($_.Value, '(?i)\bclass\s*=\s*["''][^"'']*\bcard-other-values\b')
+  })
+  Assert-True ($nonCardTables.Count -eq 0) 'rendered Notes page still contains a download table outside the listing metadata'
+  Assert-True (-not [regex]::IsMatch($notesHtml, '(?i)\bhref\s*=\s*["''][^"'']+\.zip["'']')) 'rendered Notes page still contains a source ZIP link outside the listing'
   $compatibilityLinkPattern = '(?i)\bhref\s*=\s*["'']files/notes/functional-analysis-i-foundations\.pdf["'']'
   Assert-True (([regex]::Matches($notesHtml, $compatibilityLinkPattern)).Count -eq 0) 'rendered Notes cards still link the compatibility filename instead of the current version'
   foreach ($note in $approvedRenderedNotes) {

@@ -3,7 +3,7 @@
   status: "完整译本 · 独立审校"
   version: "2026.10 · v1.0"
   date: "2026-10-27"
-  description: "William Fulton、Joe Harris 原著（GTM 129）。使用 GPT-6 完整中文翻译与重排，涵盖有限群与对称群表示、李群与李代数、根系、特征标及 Weyl 公式；26 讲和 6 个附录。PDF：472 页，12.49 MB。逐节独立审校，可编译源码见本页下载表。"
+  description: "William Fulton、Joe Harris 原著（GTM 129）。使用 GPT-6 完整中文翻译与重排，涵盖有限群与对称群表示、李群与李代数、根系、特征标及 Weyl 公式；26 讲和 6 个附录。PDF：472 页，12.49 MB。逐节独立审校。"
   categories: ["经典教材译本", "GPT-6 译制", "表示论", "李群与李代数"]
   path: "files/notes/fulton-harris-representation-theory-zh-v1.0.pdf"
 
@@ -12,7 +12,7 @@
   status: "完整译本 · 独立审校"
   version: "2026.10 · v1.0"
   date: "2026-10-26"
-  description: "朱克和（Kehe Zhu）原著（CRC Press，1993）。使用 GPT-6 完整中文翻译与重排，介绍 Banach 代数、C* 代数和 von Neumann 代数；26 讲、101 个编号小节、131 道习题及全部子问。PDF：142 页，0.92 MB。逐节独立审校，可编译源码见本页下载表。"
+  description: "朱克和（Kehe Zhu）原著（CRC Press，1993）。使用 GPT-6 完整中文翻译与重排，介绍 Banach 代数、C* 代数和 von Neumann 代数；26 讲、101 个编号小节、131 道习题及全部子问。PDF：142 页，0.92 MB。逐节独立审校。"
   categories: ["经典教材译本", "GPT-6 译制", "算子代数", "泛函分析"]
   path: "files/notes/zhu-introduction-to-operator-algebras-zh-v1.0.pdf"
 
@@ -138,7 +138,7 @@
   status: "完整译本 · 独立审校"
   version: "2026.10 · v1.0"
   date: "2026-10-26"
-  description: "李思（Si Li）原著，依据2026年6月更新稿完整中文翻译与重排，共138页，PDF 5.80 MB。涵盖接触几何、熵与配分函数、热力学极限、Ising 模型、六顶点模型及 Hubbard 模型。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  description: "李思（Si Li）原著，依据2026年6月更新稿完整中文翻译与重排，共138页，PDF 5.80 MB。涵盖接触几何、熵与配分函数、热力学极限、Ising 模型、六顶点模型及 Hubbard 模型。逐章逐节独立审校，采用泛函分析 I 模板风格。"
   categories: ["李思数学物理讲义", "中文译排", "数学物理"]
   path: "files/notes/sili-statistical-mechanics-zh-v1.0.pdf"
 
@@ -147,7 +147,7 @@
   status: "完整译本 · 独立审校"
   version: "2026.10 · v1.0"
   date: "2026-10-26"
-  description: "李思（Si Li）原著，依据2023年7月初稿更新版完整中文翻译与重排，共183页，PDF 13.28 MB。由变分原理与 Hamilton 力学进入辛几何，讨论动量映射、辛约化与可积系统。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  description: "李思（Si Li）原著，依据2023年7月初稿更新版完整中文翻译与重排，共183页，PDF 13.28 MB。由变分原理与 Hamilton 力学进入辛几何，讨论动量映射、辛约化与可积系统。逐章逐节独立审校，采用泛函分析 I 模板风格。"
   categories: ["李思数学物理讲义", "中文译排", "数学物理"]
   path: "files/notes/sili-classical-mechanics-and-geometry-zh-v1.0.pdf"
 
@@ -156,7 +156,7 @@
   status: "完整译本 · 独立审校"
   version: "2026.10 · v1.0"
   date: "2026-10-26"
-  description: "李思（Si Li）原著，依据2023年8月初稿更新版完整中文翻译与重排，共178页，PDF 7.37 MB。从 Maxwell 方程与静态电磁场出发，讨论波动、辐射、纤维丛、规范场与相对论形式。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  description: "李思（Si Li）原著，依据2023年8月初稿更新版完整中文翻译与重排，共178页，PDF 7.37 MB。从 Maxwell 方程与静态电磁场出发，讨论波动、辐射、纤维丛、规范场与相对论形式。逐章逐节独立审校，采用泛函分析 I 模板风格。"
   categories: ["李思数学物理讲义", "中文译排", "数学物理"]
   path: "files/notes/sili-electromagnetism-and-geometry-zh-v1.0.pdf"
 
@@ -165,6 +165,6 @@
   status: "完整译本 · 独立审校"
   version: "2026.10 · v1.0"
   date: "2026-10-26"
-  description: "李思（Si Li）原著，依据2025年12月初稿更新版完整中文翻译与重排，共376页，PDF 10.94 MB。涵盖量子力学的 Hilbert 空间表述、路径积分、伪微分算子与谱理论，以及几何量子化、形变量子化与迹映射。逐章逐节独立审校，采用泛函分析 I 模板风格；可编译源码见本页下载表。"
+  description: "李思（Si Li）原著，依据2025年12月初稿更新版完整中文翻译与重排，共376页，PDF 10.94 MB。涵盖量子力学的 Hilbert 空间表述、路径积分、伪微分算子与谱理论，以及几何量子化、形变量子化与迹映射。逐章逐节独立审校，采用泛函分析 I 模板风格。"
   categories: ["李思数学物理讲义", "中文译排", "数学物理"]
   path: "files/notes/sili-quantum-mechanics-and-geometry-zh-v1.0.pdf"
