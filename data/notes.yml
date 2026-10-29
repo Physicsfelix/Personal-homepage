@@ -1,3 +1,12 @@
+- title: "量子信息理论（中文重排译本）"
+  course: "量子信息与数学物理"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-30"
+  description: "John Watrous 原著（2018 年出版前草稿）。完整中文翻译与重排，涵盖量子态与信道、保真度与熵、纠缠、置换不变性及经典与量子信道容量；收录完整前后置材料、证明、习题、参考文献、记号表和索引。PDF：478 页，3.23 MB。逐章逐节独立审校，原书疑点保留并另加译校注。"
+  categories: ["经典教材译本", "GPT-6 译制", "量子信息", "数学物理"]
+  path: "files/notes/watrous-theory-of-quantum-information-zh-v1.0-97fb908b.pdf"
+
 - title: "椭圆算子、拓扑与渐近方法（中文重排译本）"
   course: "指标理论与微分几何"
   status: "完整译本 · 独立审校"
