@@ -40,6 +40,7 @@ function Test-Theme {
   $readme = Read-Text 'README.md'
   $noteTemplate = Read-Text '_templates/note-entry.yml'
   $approvedNotes = @(
+    [pscustomobject]@{ Path = 'files/notes/bott-tu-differential-forms-algebraic-topology-zh-v1.0-0a0bda3f.pdf'; Target = 'files/notes/bott-tu-differential-forms-algebraic-topology-zh-v1.0-0a0bda3f.pdf'; Hash = '0A0BDA3F96E2C886211D1152EB2F5284DFD53B49605BD6A5C4E4003C17A9E139' },
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Target = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations-v0.3-81bb3ade.pdf'; Target = 'files/notes/functional-analysis-i-foundations-v0.3-81bb3ade.pdf'; Hash = '81BB3ADE89C89F8CA454F7C1FF4B1861C36F583980779B9EB5D417370668FE76' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Target = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
@@ -96,7 +97,7 @@ function Test-Theme {
   Assert-True (-not $indexSource.Contains('\begin{aligned}')) 'home source still contains the removed aligned formula'
   Assert-True (-not $style.Contains('.signal-formula')) 'stylesheet still contains unused signal-formula rules'
   $pathMatches = [regex]::Matches($notesData, '(?m)^\s*path:\s*"?([^"\r\n]+)"?\s*$')
-  Assert-True ($pathMatches.Count -eq 19) 'notes data does not contain exactly nineteen paths'
+  Assert-True ($pathMatches.Count -eq 20) 'notes data does not contain exactly twenty paths'
   $listedPaths = @($pathMatches | ForEach-Object { $_.Groups[1].Value.Trim() })
   foreach ($note in $approvedNotes) {
     Assert-True ($listedPaths -contains $note.Path) "missing exact approved note path $($note.Path)"
@@ -122,7 +123,7 @@ function Test-Theme {
   Assert-Contains $notesDownload 'export const ATTEMPTS_PER_SOURCE = 3;' 'download attempts are not three per source'
   Assert-Contains $notesDownload 'export const REQUEST_TIMEOUT_MS = 25_000;' 'download timeout is not 25 seconds'
   $projectNotePdfs = @(Get-ChildItem (Join-Path $root 'files/notes') -File -Filter '*.pdf')
-  Assert-True ($projectNotePdfs.Count -eq 21) 'project does not contain nineteen current PDFs plus compatibility and archived Functional Analysis I PDFs'
+  Assert-True ($projectNotePdfs.Count -eq 22) 'project does not contain twenty current PDFs plus compatibility and archived Functional Analysis I PDFs'
   foreach ($note in $approvedNotes) {
     $targetPath = Join-Path $root $note.Target
     Assert-True (Test-Path -LiteralPath $targetPath -PathType Leaf) "approved note PDF is missing: $($note.Target)"
@@ -207,9 +208,10 @@ function Test-Rendered {
   $notesHtml = Read-Text '_site/notes.html'
   Assert-Contains $notesHtml 'id="note-download-config"' 'rendered Notes page lacks download configuration'
   Assert-Contains $notesHtml 'assets/notes-download.js' 'rendered Notes page does not load the download module'
-  Assert-True (([regex]::Matches($notesHtml, 'class="quarto-grid-link"')).Count -eq 19) 'rendered Notes page no longer has exactly nineteen source cards'
+  Assert-True (([regex]::Matches($notesHtml, 'class="quarto-grid-link"')).Count -eq 20) 'rendered Notes page no longer has exactly twenty source cards'
   Assert-True (-not $notesHtml.Contains('示例：第一份讲义')) 'demo note remains visible in the public listing'
   $approvedRenderedNotes = @(
+    [pscustomobject]@{ Path = 'files/notes/bott-tu-differential-forms-algebraic-topology-zh-v1.0-0a0bda3f.pdf'; Hash = '0A0BDA3F96E2C886211D1152EB2F5284DFD53B49605BD6A5C4E4003C17A9E139' },
     [pscustomobject]@{ Path = 'files/notes/noncommutative-integration.pdf'; Hash = '0BF37951DA63853A67D009AAE0AE64EA5E6685C9FA997C08AFE64A6F92E0B4A6' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-i-foundations-v0.3-81bb3ade.pdf'; Hash = '81BB3ADE89C89F8CA454F7C1FF4B1861C36F583980779B9EB5D417370668FE76' },
     [pscustomobject]@{ Path = 'files/notes/functional-analysis-ii-operator-theory.pdf'; Hash = 'E3BC504724A89D2E7E4E1A1F7FB25896D43231E6BD70B3D8F72666CB931AA4AD' },
@@ -225,7 +227,7 @@ function Test-Rendered {
     [pscustomobject]@{ Path = 'files/notes/emerson-cstar-noncommutative-geometry-zh-v1.0.pdf'; Hash = 'F23933717D0C1648C2712A4F0671054577345D351CB1F4E28B6B3D9DC8F56E49' }
   )
   $pdfLinkPattern = '(?i)\bhref\s*=\s*["'']files/notes/[^"'']+\.pdf["'']'
-  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 19) 'rendered Notes page does not contain exactly one PDF link for each of the nineteen cards'
+  Assert-True (([regex]::Matches($notesHtml, $pdfLinkPattern)).Count -eq 20) 'rendered Notes page does not contain exactly one PDF link for each of the twenty cards'
   Assert-True (-not $notesHtml.Contains('archive-notice')) 'rendered Notes page still contains a prepended notice or source-download panel'
   Assert-True (-not $notesHtml.Contains('notes-page-hero')) 'rendered Notes page still contains the removed custom introduction'
   $notesTableTags = [regex]::Matches($notesHtml, '(?i)<table\b[^>]*>')
@@ -244,7 +246,7 @@ function Test-Rendered {
     Assert-True ((Get-FileHash -LiteralPath $renderedPath -Algorithm SHA256).Hash -eq $note.Hash) "rendered note PDF hash mismatch: $($note.Path)"
   }
   $renderedNotePdfs = @(Get-ChildItem (Join-Path $root '_site/files/notes') -File -Filter '*.pdf')
-  Assert-True ($renderedNotePdfs.Count -eq 21) 'rendered site does not contain nineteen current PDFs plus compatibility and archived Functional Analysis I PDFs'
+  Assert-True ($renderedNotePdfs.Count -eq 22) 'rendered site does not contain twenty current PDFs plus compatibility and archived Functional Analysis I PDFs'
   $compatibilityRenderedPath = Join-Path $root '_site/files/notes/functional-analysis-i-foundations.pdf'
   Assert-True (Test-Path -LiteralPath $compatibilityRenderedPath -PathType Leaf) 'rendered Functional Analysis I compatibility PDF is missing'
   Assert-True ((Get-FileHash -LiteralPath $compatibilityRenderedPath -Algorithm SHA256).Hash -eq '81BB3ADE89C89F8CA454F7C1FF4B1861C36F583980779B9EB5D417370668FE76') 'rendered Functional Analysis I compatibility PDF hash mismatch'

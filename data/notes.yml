@@ -1,3 +1,12 @@
+- title: "代数拓扑中的微分形式（中文重排译本）"
+  course: "代数拓扑与微分几何"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-30"
+  description: "Raoul Bott、Loring W. Tu 原著（GTM 82）。完整中文翻译与重排，涵盖 de Rham 理论、Čech–de Rham 复形、谱序列与示性类；收录完整前后置材料、证明、习题、图表及索引。PDF：308 页，13.56 MB。逐章逐节独立审校，原书疑点保留并另加译校注。"
+  categories: ["经典教材译本", "GPT-6 译制", "代数拓扑", "微分几何"]
+  path: "files/notes/bott-tu-differential-forms-algebraic-topology-zh-v1.0-0a0bda3f.pdf"
+
 - title: "表示论：第一教程（中文重排译本）"
   course: "表示论与李群、李代数"
   status: "完整译本 · 独立审校"

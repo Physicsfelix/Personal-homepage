@@ -258,6 +258,13 @@ export function enhanceNotesListing({
   const mirrorBase = config?.dataset.mirrorBase;
   if (!mirrorBase) return;
 
+  let sourceArchives = {};
+  try {
+    sourceArchives = JSON.parse(config.dataset.sourceArchives || '{}');
+  } catch {
+    sourceArchives = {};
+  }
+
   const cardLinks = documentRef.querySelectorAll('.quarto-listing .g-col-1 > a.quarto-grid-link[href$=".pdf"]');
   for (const cardLink of cardLinks) {
     const item = cardLink.parentElement;
@@ -308,6 +315,13 @@ export function enhanceNotesListing({
       }));
       actions.append(downloadButton);
       actions.append(downloadStatus);
+    }
+
+    const sourcePath = sourceArchives[filename];
+    if (typeof sourcePath === 'string' && /^files\/notes\/[a-z0-9][a-z0-9.-]*\.zip$/i.test(sourcePath)) {
+      const sourceLink = createActionLink(documentRef, '下载源码', new URL(sourcePath, locationRef.href).href, 'note-action-source');
+      sourceLink.setAttribute('download', sourcePath.split('/').at(-1));
+      actions.append(sourceLink);
     }
 
     item.append(actions);

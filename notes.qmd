@@ -27,4 +27,5 @@ listing:
 
 <div id="note-download-config"
      data-mirror-base="https://raw.githubusercontent.com/Physicsfelix/Personal-homepage/main/"
+     data-source-archives='{"bott-tu-differential-forms-algebraic-topology-zh-v1.0-0a0bda3f.pdf":"files/notes/bott-tu-differential-forms-algebraic-topology-zh-v1.0-source-3d99c6e0.zip"}'
      hidden></div>
