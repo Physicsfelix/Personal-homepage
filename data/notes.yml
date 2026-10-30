@@ -1,3 +1,12 @@
+- title: "高阶指标理论（中文重排译本）"
+  course: "高阶指标理论与非交换几何"
+  status: "完整译本 · 独立审校"
+  version: "2026.10 · v1.0"
+  date: "2026-10-30"
+  description: "Rufus Willett、Guoliang Yu 原著（2020）。完整中文翻译与重排，涵盖 C* 代数与 K 理论、Roe 代数、局部化代数、装配映射、Baum–Connes 猜想及其几何应用；收录十三章、五篇附录及完整前后置材料、证明、习题、插图、文献和索引。PDF：514 页，3.53 MB。逐章逐节独立审校，原书疑点保留并另加译校注。"
+  categories: ["经典教材译本", "GPT-6 译制", "指标理论", "非交换几何"]
+  path: "files/notes/higher-index-theory-zh-v1.0-f8d7d351.pdf"
+
 - title: "量子信息理论（中文重排译本）"
   course: "量子信息与数学物理"
   status: "完整译本 · 独立审校"
